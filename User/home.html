@@ -1,69 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Municipality of Urbiztondo</title>
-        <link rel="stylesheet" href="css/home.css"/>
-    </head>
-    <body>
-        <!-- Navigation Bar -->
-        <div class="overlay" role="background"></div>
-        <nav class="navbar" role="navigation">
-            <div class="logo">
-                <img src="images/logo.png" alt="Municipality of Urbiztondo Logo" />
-                <span>Municipality of Urbiztondo</span>
-            </div>
-            <!-- Menu Button - <button class="menu-toggle" aria-label="Toggle menu">☰</button> -->
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Appointment</a></li>
-                <li><a href="#">Health</a></li>
-                <li><a href="#">Forms</a></li>
-                <li><a href="#">Tracker</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Log out</a></li>
-                <li><a href="#">Log-in/Register</a></li>
-            </ul>
-        </nav>
-        <!-- End Navigation Bar -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipality of Urbiztondo</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="overlay" role="background"></div>
+    <nav class="navbar" role="navigation">
+        <div class="logo">
+            <img src="images/logo.png" alt="Municipality of Urbiztondo Logo">
+            <span>Municipality of Urbiztondo</span>
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Appointment</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">Forms</a></li>
+            <li><a href="#">Tracker</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Log out</a></li>
+            <li><a href="#">Log-in/Register</a></li>
+        </ul>
+    </nav>
+    <!-- End Navigation Bar -->
 
-        <!-- Announcements -->
-         <section class="announcements-section" id="announcement">
-        </section>
-        <!-- End Announcements -->
+    <!-- Announcements -->
+    <section class="announcements-section" id="announcement">
+        <h2>Announcements</h2>
+        <div class="announcement-content-wrapper">
+            <!-- Left Side: Image Carousel -->
+            <div class="announcement-carousel-area">
+                <div class="announcement-container">
+                    <div class="carousel-inner">
+                        <!-- Each slide is a mySlides element -->
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/alerts.jpg" alt="Emergency Alerts">
+                            </div>
+                        </div>
 
-        <!-- News and Events -->
-        <section class="news-section" id="news">
-        </section>
-        <!-- End News and Events -->
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/advisory.jpeg" alt="Public Advisory">
+                            </div>
+                        </div>
 
-        <!-- Hotlines -->
-        <section class="hotlines-section" id="hotlines">
-        </section>
-        <!-- End Hotlines -->
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/municipalprogram.jpg" alt="Municipal Program">
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <img src="images/logo.png" alt="Urbiztondo Logo" />
-                <div class="footer-text">
-                    <h3>Bayan ng Urbiztondo</h3>
-                    <p>Pangasinan, Philippines</p>
-                    <p class="contact-info">
-                        📞 (075) 555-1234 | 📧 contact@urbiztondo.gov.ph
-                    </p>
-                    <p class="footer-links">
-                        <a href="terms-of-use.php">Terms of Use</a> |
-                        <a href="privacy-policy.php">Privacy Policy</a>
-                    </p>
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
-                <img src="images/seal_logo.png" alt="Pangasinan Logo" />
+                <br>
+                <!-- The dots/circles -->
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
             </div>
-            <p class="copyright">
-                © 2025 Municipality of Urbiztondo. All rights reserved.
-            </p>
-        </footer>
-        <!-- End Footer -->
-    </body>
+            <!-- Right Side: Announcement Details -->
+            <div class="announcement-details-area">
+                <h3 id="announcement-title"></h3>
+                <h6 id="announcement-date"></h6>
+                <p id="announcement-description"></p>
+            </div>
+        </div>
+    </section>
+    <!-- End Announcements -->
+
+    <!-- News and Events -->
+    <section class="news-section" id="news">
+        <h2>News and Events</h2>
+        <div class="news-grid">
+            <!-- News Card 1 -->
+            <div class="news-card">
+                <img src="images/ceremony.jpg" alt="Transition Ceremony">
+                <h3>Municipality of Urbiztondo Local Governance Transition Ceremony</h3>
+                <p class="news-date">June 17, 2025</p>
+                <p>Alinsunod sa DILG Memorandum Circular No. 2025-016, pinagasiwaan ni MLGOO Bienvenido L. Tamondong ang isinagawang Local Governance Transition Ceremony ngayong araw ng Martes, Hunyo 17 na ginanap sa MDRRMC Tactical and Operations Center.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+            <!-- News Card 2 -->
+            <div class="news-card">
+                <img src="images/drill.jpg" alt="LDRRMO News">
+                <h3>2025 2nd Quarter Nationwide Simultaneous Earthquake Drill (NSED)</h3>
+                <p class="news-date">June 19, 2025</p>
+                <p>Conduct of CY 2025 Second Quarter Nationwide Simultaneous Earthquake Drill led by MDRRMC Chairperson Mayor Modesto M. Operania in relation to RDRRMC Memorandum No. 76, s.2025.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+            <!-- News Card 3 -->
+            <div class="news-card">
+                <img src="images/trainers.jpg" alt="Training News">
+                <h3>DA-BFAR National Freshwater Technology Center Training of Trainers' Visit to Urbiztondo</h3>
+                <p class="news-date">June 20, 2025</p>
+                <p>Malugod na tinanggap ng butihing MAYOR Modesto M. Operania ang ngayong araw na mga bisita mula sa Department of Agriculture - Bureau of Fisheries and Aquatic Resources National Fresh Water Technology Center kasama ang mga participants mula sa iba’t ibang probinsya ng Luzon.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+    </section>
+    <!-- End News and Events -->
+
+    <!-- Hotlines -->
+    <section class="hotlines-section" id="hotlines">
+        <h2>Important Hotlines</h2>
+        <div class="hotlines-grid">
+            <div class="hotline-card">
+                <h3>Emergency Hotline</h3>
+                <p class="phone-number">📞 911</p>
+                <p class="description">For immediate emergencies: Police, Fire, Medical</p>
+            </div>
+            <div class="hotline-card">
+                <h3>Urbiztondo Local Disaster Risk Reduction and Management Office (LDRRMO)</h3>
+                <p class="phone-number">📞 0915-395-2551</p>
+                <!-- <p class="phone-number">📞 0905-335-7431</p> -->
+                <p class="description">For disaster preparedness and response</p>
+            </div>
+            <div class="hotline-card">
+                <h3>Rural Health Unit</h3>
+                <p class="phone-number">📞 (075) 633-3091</p>
+                <p class="description">For health-related concerns and inquiries</p>
+            </div>
+            <div class="hotline-card">
+                <h3>Bureau of Fire and Protection</h3>
+                <p class="phone-number">📞 0917-189-1611</p>
+                <p class="description">For fire emergencies, fire prevention, and rescue operations.</p>
+            </div>
+            <div class="hotline-card">
+                <h3>Philippine National Police Urbiztondo (PNP)</h3>
+                <p class="phone-number">📞 0998-598-5112</p>
+                <p class="description">For police assistance, crime reporting, and general emergencies.</p>
+            </div>
+            <div class="hotline-card">
+                <h3>Urbiztondo Water District</h3>
+                <p class="phone-number">📞 0916-525-1738</p>
+                <p class="description">For water supply and billing inquiries</p>
+            </div>
+        </div>
+    </section>
+    <!-- End Hotlines -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="images/logo.png" alt="Urbiztondo Logo">
+            <div class="footer-text">
+                <h3>Bayan ng Urbiztondo</h3>
+                <p>Pangasinan, Philippines</p>
+                <p class="contact-info">
+                    📞 (075) 555-1234 | 📧 contact@urbiztondo.gov.ph
+                </p>
+                <p class="footer-links">
+                    <a href="#">Terms of Use</a> |
+                    <a href="#">Privacy Policy</a>
+                </p>
+            </div>
+            <img src="images/seal_logo.png" alt="Pangasinan Logo">
+        </div>
+        <p class="copyright">
+            © 2025 Municipality of Urbiztondo. All rights reserved.
+        </p>
+    </footer>
+    <!-- End Footer -->
+
+    <script>
+        let slideIndex = 1;
+        let autoPlayInterval;
+        let carouselInner;
+        let announcementDetailsArea;
+        let announcementTitle;
+        let announcementDate;
+        let announcementDescription;
+
+        const announcementsData = [
+            {
+                title: "Emergency Alerts for Urbiztondo Residents",
+                date: "June 02, 2025",
+                description: "Stay vigilant and informed during critical situations. This section provides real-time updates and important instructions from local authorities. Ensure your safety by following all advisories and preparing for contingencies.",
+            },
+            {
+                title: "Public Advisory: Health and Safety Guidelines",
+                date: "June 05, 2025",
+                description: "Important notices regarding public health and safety protocols within the municipality. This includes information on local ordinances, community gatherings, and disease prevention measures. Your cooperation is vital for everyone's well-being.",
+            },
+            {
+                title: "Upcoming Municipal Programs and Events",
+                date: "June 17, 2025",
+                description: "Discover the latest initiatives, programs, and community events hosted by the Municipality of Urbiztondo. From cultural celebrations to public service projects, there's always something happening to engage and benefit our residents. Join us!",
+            }
+        ];
+
+        window.onload = function() {
+            carouselInner = document.querySelector('.carousel-inner');
+            announcementDetailsArea = document.querySelector('.announcement-details-area');
+            announcementTitle = document.getElementById('announcement-title');
+            announcementDate = document.getElementById('announcement-date');
+            announcementDescription = document.getElementById('announcement-description');
+
+            showSlides(slideIndex);
+            startAutoPlay();
+        };
+
+        function plusSlides(n) {
+            stopAutoPlay();
+            showSlides(slideIndex += n);
+            startAutoPlay();
+        }
+
+        function currentSlide(n) {
+            stopAutoPlay();
+            showSlides(slideIndex = n);
+            startAutoPlay();
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            // Loop around if index goes out of bounds (non-infinite loop logic)
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            // Get the current width of a slide after layout has been determined
+            // This ensures responsiveness on resize
+            const slideWidth = slides.length > 0 ? slides[0].offsetWidth : 0;
+
+            // Apply the transform to shift the carousel inner container
+            if (carouselInner) {
+                carouselInner.style.transform = `translateX(-${(slideIndex - 1) * slideWidth}px)`;
+            }
+
+            // Smooth text transition: fade out, update, fade in
+            // Apply a short fade-out transition for the text area
+            if (announcementDetailsArea) {
+                announcementDetailsArea.style.opacity = 0;
+            }
+
+            // After a short delay, update content and fade back in
+            setTimeout(() => {
+                const currentAnnouncement = announcementsData[slideIndex - 1];
+                if (announcementTitle) announcementTitle.textContent = currentAnnouncement.title;
+                if (announcementDate) announcementDate.textContent = currentAnnouncement.date;
+                if (announcementDescription) announcementDescription.textContent = currentAnnouncement.description;
+
+                // Fade back in
+                if (announcementDetailsArea) {
+                    announcementDetailsArea.style.opacity = 1;
+                }
+            }, 300); // 300ms delay for fade out before content changes and fades in
+
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].className += " active";
+            }
+        }
+
+        function startAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+            }
+
+            autoPlayInterval = setInterval(() => {
+                plusSlides(1);
+            }, 4000);
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        const carouselArea = document.querySelector('.announcement-carousel-area');
+        if (carouselArea) {
+            carouselArea.addEventListener('mouseover', stopAutoPlay);
+            carouselArea.addEventListener('mouseout', startAutoPlay);
+        }
+
+        window.addEventListener('resize', () => {
+            // Recalculate slide positions on resize to ensure responsiveness
+            showSlides(slideIndex);
+        });
+    </script>
+</body>
 </html>
