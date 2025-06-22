@@ -35,6 +35,7 @@
     --mont: "Montserrat", sans-serif;
     --poppins: 'Poppins', sans-serif;
     --inter: "Inter", sans-serif;
+    --franklin: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 * {
@@ -108,14 +109,6 @@ section h2::after {
 /* End Global Section Style */
 
 /* Navigation Bar */
-.overlay {
-    position: fixed;
-    background: var(--black-overlay);
-    inset: 0;
-    z-index: 1;
-    height: 4rem;
-}
-
 .navbar {
     position: fixed;
     display: flex;
@@ -128,7 +121,7 @@ section h2::after {
     padding: 10px 30px;
     width: 100%;
     height: 4.5rem;
-    z-index: 1;
+    z-index: 3;
     
     color: var(--text);
     font-family: var(--inter);
@@ -176,6 +169,124 @@ section h2::after {
 }
 /* End Navigation Bar */
 
+/* Opening Message */
+.overlay {
+    position: absolute;
+    background: var(--black-overlay);
+    inset: 0;
+    z-index: 0; /* Keep this at 0, the text will be above it */
+    height: auto;
+}
+
+.content {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    /* No change here */
+}
+
+.hero-carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+    z-index: -1;
+}
+
+.hero-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+
+/* Prev and Next Buttons (no changes needed for visibility) */
+.open-prev {
+    left: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 0;
+    transition: 0.6s ease;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.open-next {
+    right: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 0;
+    transition: 0.6s ease;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.open-prev:hover,
+.open-next:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.text-content {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    z-index: 0;
+}
+
+.text-content h2 {
+    font-family: var(--franklin);
+    cursor: default;
+    color: var(--text);
+    font-size: 4em;
+    margin-bottom: -1em;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.text-content h1 {
+    font-family: var(--lato);
+    cursor: default;
+    color: var(--text);
+    font-size: 5em;
+    margin-bottom: -1.5rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    animation: fadeInUp 1s ease-out;
+}
+
+.text-content p {
+    font-family: var(--poppins);
+    cursor: default;
+    color: var(--text);
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    animation: fadeInUp 1s ease-out;
+}
+/* End Opening Message */
+
 /* Announcements */
 .announcements-section {
     padding-top: 100px;
@@ -203,7 +314,7 @@ section h2::after {
     padding-right: 1.5rem;
 }
 
-/* Media query for larger screens to change to row layout */
+/*larger screens*/
 @media (min-width: 768px) {
     .announcement-content-wrapper {
         flex-direction: row;
@@ -217,7 +328,7 @@ section h2::after {
     min-width: 0;
 }
 
-/* Carousel Area */
+/* Image Area */
 .announcement-carousel-area {   
     padding: 20px;
     position: relative;
@@ -231,14 +342,12 @@ section h2::after {
     border-radius: 8px;
 }
 
-/* Inner container for scrolling */
 .carousel-inner {
     display: flex;
     width: 100%;
     transition: transform 0.6s ease-in-out;
 }
 
-/* Slides */
 .mySlides {
     flex-shrink: 0;
     width: 100%;
@@ -256,7 +365,6 @@ section h2::after {
     border-radius: 8px;
 }
 
-/* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -289,7 +397,6 @@ section h2::after {
     transform: translateY(-50%) scale(1.1);
 }
 
-/* The dots/bullets/indicators */
 .dot {
     cursor: pointer;
     height: 12px;
@@ -326,7 +433,7 @@ section h2::after {
     font-size: 1.75rem;
     font-weight: bold;
     color: var(--section-head-text);
-    margin-bottom: 0;
+    margin-bottom: -1.7rem;
     line-height: 1.2;
 }
 

@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <div class="overlay" role="background"></div>
     <nav class="navbar" role="navigation">
         <div class="logo">
             <img src="images/logo.png" alt="Municipality of Urbiztondo Logo">
@@ -27,49 +25,75 @@
             <li><a href="#">Log-in/Register</a></li>
         </ul>
     </nav>
-    <!-- End Navigation Bar -->
-
-    <!-- Announcements -->
+    <div class="content">
+        <div class="hero-carousel-inner">
+            <div class="hero-slide" style="background-image: url('images/homebg3.jpg');">
+                <div class="overlay" role="background"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/homebg1.png');">
+                <div class="overlay" role="background"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/homebg2.png');">
+                <div class="overlay" role="background"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/homebg3.jpg');">
+                <div class="overlay" role="background"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/homebg1.png');">
+                <div class="overlay" role="background"></div>
+            </div>
+        </div>
+        <div class="text-content">
+            <h2>Mabuhay!</h2>
+            <h1>Pasimbalo Urbiztondo</h1>
+            <p>Makabago, Malaya, Organisadong Bayan ng Urbiztondo</p>
+        </div>
+        <button class="open-prev" onclick="heroPrevSlide()">&#10094;</button>
+        <button class="open-next" onclick="heroNextSlide()">&#10095;</button>
+    </div>
     <section class="announcements-section" id="announcement">
         <h2>Announcements</h2>
         <div class="announcement-content-wrapper">
-            <!-- Left Side: Image Carousel -->
             <div class="announcement-carousel-area">
                 <div class="announcement-container">
                     <div class="carousel-inner">
-                        <!-- Each slide is a mySlides element -->
-                        <div class="mySlides">
-                            <div class="announcement-box">
-                                <img src="images/alerts.jpg" alt="Emergency Alerts">
-                            </div>
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="announcement-box">
-                                <img src="images/advisory.jpeg" alt="Public Advisory">
-                            </div>
-                        </div>
-
                         <div class="mySlides">
                             <div class="announcement-box">
                                 <img src="images/municipalprogram.jpg" alt="Municipal Program">
                             </div>
                         </div>
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/alerts.jpg" alt="Emergency Alerts">
+                            </div>
+                        </div>
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/advisory.jpeg" alt="Public Advisory">
+                            </div>
+                        </div>
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/municipalprogram.jpg" alt="Municipal Program">
+                            </div>
+                        </div>
+                        <div class="mySlides">
+                            <div class="announcement-box">
+                                <img src="images/alerts.jpg" alt="Emergency Alerts">
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Next and previous buttons -->
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
                 <br>
-                <!-- The dots/circles -->
                 <div style="text-align:center">
                     <span class="dot" onclick="currentSlide(1)"></span>
                     <span class="dot" onclick="currentSlide(2)"></span>
                     <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
-            <!-- Right Side: Announcement Details -->
             <div class="announcement-details-area">
                 <h3 id="announcement-title"></h3>
                 <h6 id="announcement-date"></h6>
@@ -77,13 +101,9 @@
             </div>
         </div>
     </section>
-    <!-- End Announcements -->
-
-    <!-- News and Events -->
     <section class="news-section" id="news">
         <h2>News and Events</h2>
         <div class="news-grid">
-            <!-- News Card 1 -->
             <div class="news-card">
                 <img src="images/ceremony.jpg" alt="Transition Ceremony">
                 <h3>Municipality of Urbiztondo Local Governance Transition Ceremony</h3>
@@ -91,7 +111,6 @@
                 <p>Alinsunod sa DILG Memorandum Circular No. 2025-016, pinagasiwaan ni MLGOO Bienvenido L. Tamondong ang isinagawang Local Governance Transition Ceremony ngayong araw ng Martes, Hunyo 17 na ginanap sa MDRRMC Tactical and Operations Center.</p>
                 <a href="#" class="read-more">Read More</a>
             </div>
-            <!-- News Card 2 -->
             <div class="news-card">
                 <img src="images/drill.jpg" alt="LDRRMO News">
                 <h3>2025 2nd Quarter Nationwide Simultaneous Earthquake Drill (NSED)</h3>
@@ -99,7 +118,6 @@
                 <p>Conduct of CY 2025 Second Quarter Nationwide Simultaneous Earthquake Drill led by MDRRMC Chairperson Mayor Modesto M. Operania in relation to RDRRMC Memorandum No. 76, s.2025.</p>
                 <a href="#" class="read-more">Read More</a>
             </div>
-            <!-- News Card 3 -->
             <div class="news-card">
                 <img src="images/trainers.jpg" alt="Training News">
                 <h3>DA-BFAR National Freshwater Technology Center Training of Trainers' Visit to Urbiztondo</h3>
@@ -109,9 +127,6 @@
             </div>
         </div>
     </section>
-    <!-- End News and Events -->
-
-    <!-- Hotlines -->
     <section class="hotlines-section" id="hotlines">
         <h2>Important Hotlines</h2>
         <div class="hotlines-grid">
@@ -123,7 +138,6 @@
             <div class="hotline-card">
                 <h3>Urbiztondo Local Disaster Risk Reduction and Management Office (LDRRMO)</h3>
                 <p class="phone-number">📞 0915-395-2551</p>
-                <!-- <p class="phone-number">📞 0905-335-7431</p> -->
                 <p class="description">For disaster preparedness and response</p>
             </div>
             <div class="hotline-card">
@@ -148,9 +162,6 @@
             </div>
         </div>
     </section>
-    <!-- End Hotlines -->
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <img src="images/logo.png" alt="Urbiztondo Logo">
@@ -171,16 +182,82 @@
             © 2025 Municipality of Urbiztondo. All rights reserved.
         </p>
     </footer>
-    <!-- End Footer -->
-
     <script>
-        let slideIndex = 1;
+        // --- Hero Carousel Logic ---
+        let heroSlideIndex; // Will be initialized to point to the first REAL slide
+        let heroAutoSlideInterval;
+        let heroCarouselInner;
+        let heroSlides;
+        const totalHeroRealSlides = 3; // Number of original hero slides
+
+        // Function to show/hide the appropriate hero slide
+        function showHeroSlides(n, smoothTransition = true) {
+            heroSlides = document.querySelectorAll(".hero-slide");
+            heroCarouselInner = document.querySelector(".hero-carousel-inner");
+
+            if (!heroSlides.length || !heroCarouselInner) return;
+
+            if (smoothTransition) {
+                heroCarouselInner.style.transition = "transform 1s ease-in-out";
+            } else {
+                heroCarouselInner.style.transition = "none"; // For instant snap back
+            }
+
+            // Adjust index for duplicated slides
+            if (n > totalHeroRealSlides) { // If going past the last real slide (onto duplicated first)
+                heroSlideIndex = totalHeroRealSlides + 1; // Temporarily go to the duplicated first slide
+                // Then, after the transition, snap back to the actual first slide
+                setTimeout(() => {
+                    heroCarouselInner.style.transition = "none";
+                    heroSlideIndex = 1; // Reset to the first real slide's index
+                    heroCarouselInner.style.transform = `translateX(-${heroSlideIndex * heroSlides[0].clientWidth}px)`;
+                }, 1000); // Must be slightly longer than the transition duration
+            } else if (n < 1) { // If going before the first real slide (onto duplicated last)
+                heroSlideIndex = 0; // Temporarily go to the duplicated last slide
+                // Then, after the transition, snap back to the actual last slide
+                setTimeout(() => {
+                    heroCarouselInner.style.transition = "none";
+                    heroSlideIndex = totalHeroRealSlides; // Reset to the last real slide's index
+                    heroCarouselInner.style.transform = `translateX(-${heroSlideIndex * heroSlides[0].clientWidth}px)`;
+                }, 1000); // Must be slightly longer than the transition duration
+            } else {
+                heroSlideIndex = n;
+            }
+
+            const slideWidth = heroSlides[0].clientWidth;
+            heroCarouselInner.style.transform = `translateX(-${heroSlideIndex * slideWidth}px)`;
+        }
+
+        // Functions for hero navigation buttons
+        function heroNextSlide() {
+            showHeroSlides(heroSlideIndex + 1);
+        }
+
+        function heroPrevSlide() {
+            showHeroSlides(heroSlideIndex - 1);
+        }
+
+        // Auto-play for hero carousel
+        function startHeroAutoPlay() {
+            if (heroAutoSlideInterval) {
+                clearInterval(heroAutoSlideInterval);
+            }
+            heroAutoSlideInterval = setInterval(heroNextSlide, 3000);
+        }
+
+        function stopHeroAutoPlay() {
+            clearInterval(heroAutoSlideInterval);
+        }
+
+        // --- Announcements Carousel Logic ---
+        let slideIndex; // Will be initialized to point to the first REAL slide
         let autoPlayInterval;
         let carouselInner;
         let announcementDetailsArea;
         let announcementTitle;
         let announcementDate;
         let announcementDescription;
+        const totalAnnouncementRealSlides = 3; // Number of original announcement slides
 
         const announcementsData = [
             {
@@ -201,72 +278,108 @@
         ];
 
         window.onload = function() {
+            // Initialize Hero Carousel
+            heroCarouselInner = document.querySelector(".hero-carousel-inner");
+            heroSlides = document.querySelectorAll(".hero-slide");
+            heroSlideIndex = 1; // Start on the first REAL slide
+            showHeroSlides(heroSlideIndex, false); // Initialize without smooth transition
+            startHeroAutoPlay();
+
+            // Initialize Announcement Carousel elements
             carouselInner = document.querySelector('.carousel-inner');
             announcementDetailsArea = document.querySelector('.announcement-details-area');
             announcementTitle = document.getElementById('announcement-title');
             announcementDate = document.getElementById('announcement-date');
             announcementDescription = document.getElementById('announcement-description');
 
-            showSlides(slideIndex);
+            // Initialize the Announcements Carousel
+            slideIndex = 1; // Start on the first REAL slide
+            showSlides(slideIndex, false); // Initialize without smooth transition
             startAutoPlay();
         };
 
         function plusSlides(n) {
             stopAutoPlay();
-            showSlides(slideIndex += n);
+            showSlides(slideIndex + n);
             startAutoPlay();
         }
 
         function currentSlide(n) {
             stopAutoPlay();
-            showSlides(slideIndex = n);
+            showSlides(n); // Dots should directly jump to the real slide index (1, 2, 3)
             startAutoPlay();
         }
 
-        function showSlides(n) {
+        function showSlides(n, smoothTransition = true) {
             let i;
             let slides = document.getElementsByClassName("mySlides");
             let dots = document.getElementsByClassName("dot");
 
-            // Loop around if index goes out of bounds (non-infinite loop logic)
-            if (n > slides.length) { slideIndex = 1; }
-            if (n < 1) { slideIndex = slides.length; }
+            if (slides.length === 0) return;
 
+            if (smoothTransition) {
+                carouselInner.style.transition = "transform 0.6s ease-in-out";
+            } else {
+                carouselInner.style.transition = "none"; // For instant snap back
+            }
+
+            // Handle "infinite" loop logic
+            if (n > totalAnnouncementRealSlides) { // If going past the last real slide (onto duplicated first)
+                slideIndex = totalAnnouncementRealSlides + 1; // Temporarily go to the duplicated first slide
+                setTimeout(() => {
+                    carouselInner.style.transition = "none";
+                    slideIndex = 1; // Reset to the first real slide's index
+                    carouselInner.style.transform = `translateX(-${slideIndex * slides[0].clientWidth}px)`;
+                }, 600); // Must be slightly longer than the transition duration
+            } else if (n < 1) { // If going before the first real slide (onto duplicated last)
+                slideIndex = 0; // Temporarily go to the duplicated last slide
+                setTimeout(() => {
+                    carouselInner.style.transition = "none";
+                    slideIndex = totalAnnouncementRealSlides; // Reset to the last real slide's index
+                    carouselInner.style.transform = `translateX(-${slideIndex * slides[0].clientWidth}px)`;
+                }, 600); // Must be slightly longer than the transition duration
+            } else {
+                slideIndex = n;
+            }
+
+            // Update dot active class (dots represent real slides, so index from 1 to totalRealSlides)
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-
-            // Get the current width of a slide after layout has been determined
-            // This ensures responsiveness on resize
-            const slideWidth = slides.length > 0 ? slides[0].offsetWidth : 0;
-
-            // Apply the transform to shift the carousel inner container
-            if (carouselInner) {
-                carouselInner.style.transform = `translateX(-${(slideIndex - 1) * slideWidth}px)`;
+            // The dot index corresponds to the real slide index (1-based)
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].className += " active";
             }
 
-            // Smooth text transition: fade out, update, fade in
-            // Apply a short fade-out transition for the text area
+            // Calculate the transform based on the current `slideIndex` (0 for duplicated last, 1-total for real, total+1 for duplicated first)
+            const slideWidth = slides[0].clientWidth; // Use current width for responsiveness
+            if (carouselInner) {
+                carouselInner.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+            }
+
+            // Smooth text transition for announcement details
             if (announcementDetailsArea) {
                 announcementDetailsArea.style.opacity = 0;
             }
 
-            // After a short delay, update content and fade back in
             setTimeout(() => {
-                const currentAnnouncement = announcementsData[slideIndex - 1];
+                // Ensure correct data is picked when snapping back
+                let dataIndex = slideIndex;
+                if (dataIndex === 0) { // If currently on the duplicated last slide
+                    dataIndex = totalAnnouncementRealSlides;
+                } else if (dataIndex === totalAnnouncementRealSlides + 1) { // If currently on the duplicated first slide
+                    dataIndex = 1;
+                }
+                const currentAnnouncement = announcementsData[dataIndex - 1]; // dataIndex is 1-based
+
                 if (announcementTitle) announcementTitle.textContent = currentAnnouncement.title;
                 if (announcementDate) announcementDate.textContent = currentAnnouncement.date;
                 if (announcementDescription) announcementDescription.textContent = currentAnnouncement.description;
 
-                // Fade back in
                 if (announcementDetailsArea) {
                     announcementDetailsArea.style.opacity = 1;
                 }
             }, 300); // 300ms delay for fade out before content changes and fades in
-
-            if (dots[slideIndex - 1]) {
-                dots[slideIndex - 1].className += " active";
-            }
         }
 
         function startAutoPlay() {
@@ -289,9 +402,18 @@
             carouselArea.addEventListener('mouseout', startAutoPlay);
         }
 
+        // Add event listeners for the hero carousel container to pause on hover
+        const heroContainer = document.querySelector('.content'); // Targeting the main .content div for hero hover
+        if (heroContainer) {
+            heroContainer.addEventListener('mouseover', stopHeroAutoPlay);
+            heroContainer.addEventListener('mouseout', startHeroAutoPlay);
+        }
+
         window.addEventListener('resize', () => {
-            // Recalculate slide positions on resize to ensure responsiveness
-            showSlides(slideIndex);
+            // Recalculate slide positions on resize to ensure responsiveness for both carousels
+            // Ensure `heroSlideIndex` and `slideIndex` are updated after resize to maintain current view
+            showSlides(slideIndex, false); // False for no transition on resize
+            showHeroSlides(heroSlideIndex, false); // False for no transition on resize
         });
     </script>
 </body>
