@@ -224,6 +224,7 @@
                 heroSlideIndex = n;
             }
 
+            // Calculate the transform value based on the current slide index
             const slideWidth = heroSlides[0].clientWidth;
             heroCarouselInner.style.transform = `translateX(-${heroSlideIndex * slideWidth}px)`;
         }
@@ -242,7 +243,7 @@
             if (heroAutoSlideInterval) {
                 clearInterval(heroAutoSlideInterval);
             }
-            heroAutoSlideInterval = setInterval(heroNextSlide, 3000);
+            heroAutoSlideInterval = setInterval(heroNextSlide, 3000); // Change slide every 3 seconds
         }
 
         function stopHeroAutoPlay() {
@@ -261,19 +262,19 @@
 
         const announcementsData = [
             {
-                title: "Emergency Alerts for Urbiztondo Residents",
+                title: "Upcoming Municipal Programs and Events", // Swapped order to match your HTML
+                date: "June 17, 2025",
+                description: "Discover the latest initiatives, programs, and community events hosted by the Municipality of Urbiztondo. From cultural celebrations to public service projects, there's always something happening to engage and benefit our residents. Join us!",
+            },
+            {
+                title: "Emergency Alerts for Urbiztondo Residents", // Swapped order to match your HTML
                 date: "June 02, 2025",
                 description: "Stay vigilant and informed during critical situations. This section provides real-time updates and important instructions from local authorities. Ensure your safety by following all advisories and preparing for contingencies.",
             },
             {
-                title: "Public Advisory: Health and Safety Guidelines",
+                title: "Public Advisory: Health and Safety Guidelines", // Swapped order to match your HTML
                 date: "June 05, 2025",
                 description: "Important notices regarding public health and safety protocols within the municipality. This includes information on local ordinances, community gatherings, and disease prevention measures. Your cooperation is vital for everyone's well-being.",
-            },
-            {
-                title: "Upcoming Municipal Programs and Events",
-                date: "June 17, 2025",
-                description: "Discover the latest initiatives, programs, and community events hosted by the Municipality of Urbiztondo. From cultural celebrations to public service projects, there's always something happening to engage and benefit our residents. Join us!",
             }
         ];
 
@@ -357,10 +358,11 @@
                 carouselInner.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
             }
 
-            // Smooth text transition for announcement details
-            if (announcementDetailsArea) {
-                announcementDetailsArea.style.opacity = 0;
-            }
+            // --- MODIFICATION START ---
+            // Instead of fading the entire area, fade out the individual text elements
+            if (announcementTitle) announcementTitle.style.opacity = 0;
+            if (announcementDate) announcementDate.style.opacity = 0;
+            if (announcementDescription) announcementDescription.style.opacity = 0;
 
             setTimeout(() => {
                 // Ensure correct data is picked when snapping back
@@ -376,10 +378,13 @@
                 if (announcementDate) announcementDate.textContent = currentAnnouncement.date;
                 if (announcementDescription) announcementDescription.textContent = currentAnnouncement.description;
 
-                if (announcementDetailsArea) {
-                    announcementDetailsArea.style.opacity = 1;
-                }
+                // Fade in the individual text elements
+                if (announcementTitle) announcementTitle.style.opacity = 1;
+                if (announcementDate) announcementDate.style.opacity = 1;
+                if (announcementDescription) announcementDescription.style.opacity = 1;
+
             }, 300); // 300ms delay for fade out before content changes and fades in
+            // --- MODIFICATION END ---
         }
 
         function startAutoPlay() {
@@ -411,7 +416,6 @@
 
         window.addEventListener('resize', () => {
             // Recalculate slide positions on resize to ensure responsiveness for both carousels
-            // Ensure `heroSlideIndex` and `slideIndex` are updated after resize to maintain current view
             showSlides(slideIndex, false); // False for no transition on resize
             showHeroSlides(heroSlideIndex, false); // False for no transition on resize
         });
