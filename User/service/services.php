@@ -93,7 +93,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <img src="images/logo.png" alt="Urbiztondo Logo" onerror="this.src='https://placehold.co/100x100/CCCCCC/666666?text=Logo+Error';">
+            <img src="../images/logo.png" alt="Urbiztondo Logo" onerror="this.src='https://placehold.co/100x100/CCCCCC/666666?text=Logo+Error';">
             <div class="footer-text">
                 <h3>Bayan ng Urbiztondo</h3>
                 <p>Pangasinan, Philippines</p>
@@ -105,7 +105,7 @@
                     <a href="#">Privacy Policy</a>
                 </p>
             </div>
-            <img src="images/seal_logo.png" alt="Pangasinan Logo" onerror="this.src='https://placehold.co/100x100/CCCCCC/666666?text=Seal+Error';">
+            <img src="../images/seal_logo.png" alt="Pangasinan Logo" onerror="this.src='https://placehold.co/100x100/CCCCCC/666666?text=Seal+Error';">
         </div>
         <p class="copyright">
             © 2025 Municipality of Urbiztondo. All rights reserved.
