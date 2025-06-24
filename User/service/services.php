@@ -22,11 +22,12 @@
         <ul>
             <li><a href="../home.php">Home</a></li>
             <li><a href="../aboutus.php">About Us</a></li>
-            <li><a href="service.php" class="active">Services</a></li>
+            <li><a href="#" class="active">Services</a></li>
             <li><a href="../appointment.php">Appointment</a></li>
             <li><a href="../health.php">Health</a></li>
             <li><a href="../forms.php">Forms</a></li>
             <li><a href="../paytrack.php">Tracker</a></li>
+            <li><a href="../feedback.php">Feedback</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
             <li><a href="../profile.php">Profile</a></li>
             <li><a href="http://localhost/Service/logout.php">Log out</a></li>
@@ -101,8 +102,8 @@
                     📞 (075) 555-1234 | 📧 contact@urbiztondo.gov.ph
                 </p>
                 <p class="footer-links">
-                    <a href="#">Terms of Use</a> |
-                    <a href="#">Privacy Policy</a>
+                    <a href="../../terms-of-use.php">Terms of Use</a> |
+                    <a href="../../privacy-policy.php">Privacy Policy</a>
                 </p>
             </div>
             <img src="../images/seal_logo.png" alt="Pangasinan Logo" onerror="this.src='https://placehold.co/100x100/CCCCCC/666666?text=Seal+Error';">
