@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="body-base">
+    <div id="portal-container" class="portal-container">
+        <div id="service-selection-view" class="service-selection-view">
+            <div class="main-card">
+                <h2 class="main-heading">What Service Are You Looking For?</h2>
+                <div class="service-grid service-grid-spacing">
+                    <button data-service="permits" class="service-btn hover-blue">
+                        <span class="service-btn-title blue">Permits</span>
+                        <p class="service-btn-description">Building, Business, etc.</p>
+                    </button>
+                    <button data-service="certificates" class="service-btn hover-green">
+                        <span class="service-btn-title green">Certificates</span>
+                        <p class="service-btn-description">Birth, Marriage, etc.</p>
+                    </button>
+                    <button data-service="clearances" class="service-btn hover-yellow">
+                        <span class="service-btn-title yellow">Clearances</span>
+                        <p class="service-btn-description">Police, Fire Safety, Environment, etc.</p>
+                    </button>
+                    <button data-service="licenses" class="service-btn hover-purple">
+                        <span class="service-btn-title purple">Licenses</span>
+                        <p class="service-btn-description">Marriage, etc.</p>
+                    </button>
+                </div>
+                <div class="home-button-container">
+                    <a href="index.html" class="continue-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                        Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="service-detail-view" class="hidden-content service-detail-view-container">
+            <div class="detail-header">
+                <h2 id="service-detail-title" class="detail-title"></h2>
+                <button id="back-to-selection-btn" class="back-btn hover-gray">
+                    &larr; Back
+                </button>
+            </div>
+            
+            <div class="tab-nav-container">
+                <nav class="tab-nav" aria-label="Tabs">
+                    <button data-tab="guide" class="detail-tab">Step-by-Step Guide</button>
+                    <button data-tab="requirements" class="detail-tab">Requirements</button>
+                    <button data-tab="application" class="detail-tab">Online Application</button>
+                    <button data-tab="upload" class="detail-tab">Upload Supporting Document/s</button>
+                    <button data-tab="process" class="detail-tab">Document Process</button>
+                    <button data-tab="department" class="detail-tab">Department Info</button>
+                </nav>
+            </div>
+
+            <div id="service-detail-content-area">
+                <div id="guide-content" class="tab-pane-content"></div>
+                <div id="requirements-content" class="tab-pane-content"></div>
+                <div id="application-content" class="tab-pane-content"></div>
+                <div id="upload-content" class="tab-pane-content"></div>
+                <div id="process-content" class="tab-pane-content"></div>
+                <div id="department-content" class="tab-pane-content"></div>
+            </div>
+        </div>
+    </div>
+
+<script src="service.js"></script> 
+</body>
+</html>
