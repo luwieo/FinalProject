@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: http://localhost/urbiztondo-auth/finance/finance_dashboard.php');
         break;
 
-        case 'Portal Content Manager':
+        case 'Public Information Officer':
             header('Location: http://localhost/urbiztondo-auth/pio/pio_dashboard.php');
         break;
 
