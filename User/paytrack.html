@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="paytrack.css">
 </head>
+
 <body class="antialiased text-gray-800">
 
     <div class="container">
@@ -22,13 +24,15 @@
             <form id="tracking-form">
                 <label for="reference-number">Enter Your Reference Number</label>
                 <div class="search-form-elements">
-                    <input type="text" id="reference-number" name="reference-number" class="search-input" placeholder="e.g., DOC-2025-002">
+                    <input type="text" id="reference-number" name="reference-number" class="search-input"
+                        placeholder="e.g., DOC-2025-002">
                     <button type="submit" class="track-button">
                         Track Status
                     </button>
                 </div>
-                 <p class="sample-numbers">
-                    Sample numbers: <strong>DOC-2025-001</strong> (Document), <strong>DOC-2025-002</strong> (Requires Payment), <strong>FDB-2025-001</strong> (Feedback), <strong>FDB-2025-002</strong> (Feedback)
+                <p class="sample-numbers">
+                    Sample numbers: <strong>DOC-2025-001</strong> (Document), <strong>DOC-2025-002</strong> (Requires
+                    Payment), <strong>FDB-2025-001</strong> (Feedback), <strong>FDB-2025-002</strong> (Feedback)
                 </p>
             </form>
         </div>
@@ -64,7 +68,7 @@
                     </label>
                     <label class="payment-option">
                         <input type="radio" name="paymentMethod" value="Bank Transfer">
-                         <img src="logos/bank.jpg" alt="Bank Transfer Logo" class="payment-logo">
+                        <img src="logos/bank.jpg" alt="Bank Transfer Logo" class="payment-logo">
                         Bank Transfer
                     </label>
                 </div>
@@ -136,7 +140,7 @@
                         { status: 'Under Review', date: '2025-06-21', description: 'The appropriate department is now reviewing your feedback.' },
                     ]
                 },
-                 'FDB-2025-002': {
+                'FDB-2025-002': {
                     referenceNumber: 'FDB-2025-002',
                     type: 'Feedback',
                     requesterName: 'Crisostomo Ibarra',
@@ -172,15 +176,15 @@
             const confirmPaymentBtn = document.getElementById('confirm-payment-button');
 
             const mockStatusOptions = {
-                getDocumentStatuses: function() {
+                getDocumentStatuses: function () {
                     return new Promise(resolve => {
                         setTimeout(() => {
-                            
+
                             resolve(["Received", "Processing", "Waiting for Payment", "Ready for Release", "Released"]);
                         }, 100);
                     });
                 },
-                getFeedbackStatuses: function() {
+                getFeedbackStatuses: function () {
                     return new Promise(resolve => {
                         setTimeout(() => {
                             resolve(["Pending", "On Process", "Complete", "Denied"]);
@@ -215,7 +219,7 @@
                     showMessage('Please enter a reference number.', 'error');
                 }
             });
-            
+
             modalCloseBtn.addEventListener('click', () => paymentModalOverlay.classList.remove('visible'));
 
             paymentOptionsContainer.addEventListener('click', (e) => {
@@ -245,7 +249,7 @@
                     showMessage('Reference number not found.', 'error');
                 }
             }
-            
+
             function renderResults(data) {
                 const headerHtml = `
                     <div class="results-header">
@@ -318,7 +322,7 @@
                         </div>` : ''}
                     `;
                 }
-                
+
                 return `
                     <div class="summary-section">
                          <div class="summary-grid">
@@ -344,32 +348,52 @@
                 const data = mockDb[refNum];
                 const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
                 const transactionNumber = `TRN-${Date.now()}`;
+                const amount = data.details.paymentAmount;
+                const applicantName = data.requesterName;
 
-                data.status = 'Ready for Release'; 
+                fetch('save_payment.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        reference_number: refNum,
+                        applicant_name: applicantName,
+                        amount: amount,
+                        payment_method: paymentMethod,
+                        transaction_number: transactionNumber,
+                        status: 'Ready for Release'
+                    })
+                })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log(result); // ✅ Output what the backend returned
+                        if (result.status === 'success') {
+                            showMessage('Payment Successful!', 'success');
+                        } else {
+                            showMessage('Error: ' + result.message, 'error');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Fetch error:', err);
+                        showMessage('Unexpected error occurred', 'error');
+                    });
+                // Continue updating mockDb and UI...
+                data.status = 'Ready for Release';
                 data.details.paymentStatus = 'Paid';
                 data.details.transactionNumber = transactionNumber;
                 data.details.paymentMethod = paymentMethod;
-              
-                data.departmentRemark = "Payment received. Your document is now ready for release."; 
-                data.timeline.push({ 
-                    status: 'Payment Completed', 
-                    date: new Date().toISOString().slice(0, 10), 
-                    description: `Payment of ₱${data.details.paymentAmount} made via ${paymentMethod}.` 
-                });
+                data.departmentRemark = "Payment received. Document ready for release.";
                 data.timeline.push({
-                    status: 'Ready for Release',
+                    status: 'Payment Completed',
                     date: new Date().toISOString().slice(0, 10),
-                    description: 'Your document is now ready for pickup at the main office.'
+                    description: `₱${amount} paid via ${paymentMethod}.`
                 });
-                data.details.viewedReceipt = false;
-
                 localStorage.setItem('trackingData', JSON.stringify(mockDb));
-
                 paymentModalOverlay.classList.remove('visible');
                 showMessage('Payment Successful!', 'success');
 
                 setTimeout(() => trackStatus(refNum), 300);
             }
+
 
             function renderEReceipt(data) {
                 const { referenceNumber, details } = data;
@@ -396,11 +420,11 @@
                     trackStatus(data.referenceNumber);
                 });
             }
-            
+
             function showMessage(message, type = 'error') {
                 messageText.textContent = message;
                 messageBox.className = `fixed top-5 right-5 text-white py-3 px-5 rounded-lg shadow-xl ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`;
-                
+
                 messageBox.classList.add('opacity-0', 'translate-y-[-20px]');
 
                 setTimeout(() => {
@@ -418,4 +442,5 @@
     </script>
 
 </body>
+
 </html>
