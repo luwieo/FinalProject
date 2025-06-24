@@ -20,15 +20,15 @@
             <span>Municipality of Urbiztondo</span>
         </div>
         <ul>
-            <li><a href="../home.html">Home</a></li>
-            <li><a href="../aboutus.html">About Us</a></li>
+            <li><a href="../home.php">Home</a></li>
+            <li><a href="../aboutus.php">About Us</a></li>
             <li><a href="service.php" class="active">Services</a></li>
-            <li><a href="../appointment.html">Appointment</a></li>
-            <li><a href="#">Health</a></li>
-            <li><a href="../forms.html">Forms</a></li>
-            <li><a href="../paytrack.html">Tracker</a></li>
+            <li><a href="../appointment.php">Appointment</a></li>
+            <li><a href="../health.php">Health</a></li>
+            <li><a href="../forms.php">Forms</a></li>
+            <li><a href="../paytrack.php">Tracker</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
-            <li><a href="profile.php">Profile</a></li>
+            <li><a href="../profile.php">Profile</a></li>
             <li><a href="http://localhost/Service/logout.php">Log out</a></li>
             <?php else: ?>
             <li><a href="http://localhost/Service/login.html">Log-in/Register</a></li>

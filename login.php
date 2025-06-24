@@ -27,30 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'address' => $user['address'] ?? 'N/A',
                 'birth_date' => $user['birth_date'] ?? 'N/A', // Using 'birth_date' as per your DB schema
                 'gender' => $user['gender'] ?? 'N/A',
-                'user_type' => $user['user_type'] ?? 'Resident' // Store the user type from the DB
+                'user_type' => $user['user_type'] ?? 'public' // Store the user type from the DB
             ];
 
-                // Redirect based on user_type
-    switch ($_SESSION['user']['user_type']) {
-        case 'System Administrator':
-            header('Location: http://localhost/urbiztondo-auth/admin/admin_dashboard.php');
-        break;
-
-        case 'Municipal Treasurer / Finance Officer':
-            header('Location: http://localhost/urbiztondo-auth/finance/finance_dashboard.php');
-        break;
-
-        case 'Public Information Officer':
-            header('Location: http://localhost/urbiztondo-auth/pio/pio_dashboard.php');
-        break;
-
-    // Add other roles here as needed...
-    
-    default:
-        header('Location: http://localhost/urbiztondo-auth/index.php'); // Resident or fallback
-        break;
-}
-    exit;
+            // Redirect based on user_type
+            if ($_SESSION['user']['user_type'] === 'System Administrator') {
+                header('Location: Admin/admin_dashboard.php'); // Redirect to your admin dashboard
+                exit;
+            } else {
+                header('Location: User/home.php'); // Redirect to the public home page
+                exit;
+            }
         } else {
             // Login failed - Incorrect password
             header('Location: login.html?login_error=password'); // Specific error for incorrect password

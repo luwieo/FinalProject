@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = [
             'name' => $first_name . ' ' . $last_name,
             'email' => $email,
-            'user_type' => 'Resident' // Default user_type for new signups
+            'user_type' => 'public' // Default user_type for new signups
         ];
 
         // Redirect to login page with success message

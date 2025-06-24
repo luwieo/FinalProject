@@ -18,9 +18,9 @@
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="aboutus.php">About Us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="service/services.php">Services</a></li>
             <li><a href="appointment.php">Appointment</a></li>
-            <li><a href="#">Health</a></li>
+            <li><a href="#" class="active">Health</a></li>
             <li><a href="forms.php">Forms</a></li>
             <li><a href="paytrack.php">Tracker</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>

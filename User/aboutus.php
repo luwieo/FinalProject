@@ -16,8 +16,8 @@
         </div>
         <ul>
             <li><a href="home.php">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="#" class="active">About Us</a></li>
+            <li><a href="service/services.php">Services</a></li>
             <li><a href="appointment.php">Appointment</a></li>
             <li><a href="health.php">Health</a></li>
             <li><a href="forms.php">Forms</a></li>

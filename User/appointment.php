@@ -17,8 +17,8 @@
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="aboutus.php">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Appointment</a></li>
+            <li><a href="service/services.php">Services</a></li>
+            <li><a href="#" class="active">Appointment</a></li>
             <li><a href="health.php">Health</a></li>
             <li><a href="forms.php">Forms</a></li>
             <li><a href="paytrack.php">Tracker</a></li>

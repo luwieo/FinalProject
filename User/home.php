@@ -15,9 +15,9 @@
             <span>Municipality of Urbiztondo</span>
         </div>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="#" class="active">Home</a></li>
             <li><a href="aboutus.php">About Us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="service/services.php">Services</a></li>
             <li><a href="appointment.php">Appointment</a></li>
             <li><a href="health.php">Health</a></li>
             <li><a href="forms.php">Forms</a></li>

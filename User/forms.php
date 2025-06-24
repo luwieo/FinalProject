@@ -478,10 +478,10 @@
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="aboutus.php">About Us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="service/services.php">Services</a></li>
             <li><a href="appointment.php">Appointment</a></li>
             <li><a href="health.php">Health</a></li>
-            <li><a href="#">Forms</a></li>
+            <li><a href="#" class="active">Forms</a></li>
             <li><a href="paytrack.php">Tracker</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
             <li><a href="profile.php">Profile</a></li>
