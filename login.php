@@ -30,14 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'user_type' => $user['user_type'] ?? 'Resident' // Store the user type from the DB
             ];
 
-            // Redirect based on user_type
-            if ($_SESSION['user']['user_type'] === 'admin') {
-                header('Location: http://localhost/E-Service/Admin/admin_dashboard.php'); // Redirect to your admin dashboard
-                exit;
-            } else {
-                header('Location: index.php'); // Redirect to the public home page
-                exit;
-            }
+                // Redirect based on user_type
+    switch ($_SESSION['user']['user_type']) {
+        case 'System Administrator':
+            header('Location: http://localhost/urbiztondo-auth/admin/admin_dashboard.php');
+        break;
+
+        case 'Municipal Treasurer / Finance Officer':
+            header('Location: http://localhost/urbiztondo-auth/finance/finance_dashboard.php');
+        break;
+
+        case 'Portal Content Manager':
+            header('Location: http://localhost/urbiztondo-auth/pio/pio_dashboard.php');
+        break;
+
+    // Add other roles here as needed...
+    
+    default:
+        header('Location: http://localhost/urbiztondo-auth/index.php'); // Resident or fallback
+        break;
+}
+    exit;
         } else {
             // Login failed - Incorrect password
             header('Location: login.html?login_error=password'); // Specific error for incorrect password
