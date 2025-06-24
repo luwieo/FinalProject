@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Municipality of Urbiztondo</title>
+    <style>
+        /* General Body and Container Styles - consistent with aboutus.html */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f3f4f6; 
+            color: #374151; 
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1280px; 
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1rem; 
+        }
+        @media (min-width: 640px) { 
+            .container {
+                padding: 1.5rem; 
+            }
+        }
+        @media (min-width: 1024px) { 
+            .container {
+                padding: 2rem; 
+            }
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 3rem; 
+        }
+
+        header h1 {
+            font-size: 2.25rem; 
+            font-weight: 800; 
+            color: #1e40af; 
+            margin-bottom: 1rem;
+            border-radius: 0.5rem; 
+            padding: 0.5rem; /* p-2 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+        }
+        @media (min-width: 640px) { 
+            header h1 {
+                font-size: 3rem; 
+            }
+        }
+
+        header p {
+            font-size: 1.125rem; 
+            color: #4b5563; 
+        }
+        @media (min-width: 640px) { 
+            header p {
+                font-size: 1.25rem; 
+            }
+        }
+
+        /* Section Base Styles */
+        section {
+            background-color: #ffffff; 
+            padding: 1.5rem; 
+            border-radius: 1rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            margin-bottom: 3rem; 
+        }
+        @media (min-width: 640px) {
+            section {
+                padding: 2rem; 
+            }
+        }
+
+        section h2 {
+            font-size: 1.875rem; 
+            font-weight: 700; 
+            color: #1d4ed8; 
+            margin-bottom: 1.5rem; 
+            border-bottom: 2px solid #bfdbfe; 
+            padding-bottom: 0.75rem; 
+            text-align: center; 
+        }
+
+        /* Profile Card Specific Styles */
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-color: #f9fafb;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 600px;
+            margin: 0 auto; 
+        }
+
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid #60a5fa; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .profile-info {
+            width: 100%;
+            text-align: left;
+            margin-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1.5rem;
+        }
+
+        .profile-info div {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .profile-info strong {
+            color: #1d4ed8;
+            margin-right: 0.5rem;
+            min-width: 120px; /* Aligns the labels */
+            flex-shrink: 0;
+        }
+
+        .profile-info span {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        /* Button Styling */
+        .action-button {
+            display: inline-block;
+            background-color: #1d4ed8; 
+            color: #ffffff; 
+            padding: 0.75rem 1.5rem; 
+            border-radius: 0.5rem; 
+            font-weight: 600;
+            text-decoration: none; 
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-top: 1.5rem;
+            cursor: pointer;
+            border: none; 
+        }
+
+        .action-button:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* New section specific styles for history tables/lists */
+        .history-section h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #fcfcfc;
+            border-radius: 0.5rem;
+            overflow: hidden; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .history-table th, .history-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .history-table th {
+            background-color: #e0e7ff; 
+            color: #1e40af; 
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .history-table tbody tr:hover {
+            background-color: #eff6ff; 
+        }
+
+        /* Specific styling for status badges */
+        .status-paid {
+            background-color: #d1fae5; 
+            color: #065f46; 
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #fee2e2; 
+            color: #991b1b; 
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+
+        /* Footer Styles*/
+        footer {
+            text-align: center;
+            color: #6b7280; 
+            font-size: 0.875rem; 
+            margin-top: 3rem; 
+            margin-bottom: 1rem; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>User Profile</h1>
+            <p>Your personal information and activities</p>
+        </header>
+
+        <!-- Profile Content Section -->
+        <section>
+            <h2>My Account</h2>
+            <div class="profile-card">
+                <img src="https://placehold.co/150x150/A3B8CC/FFFFFF?text=User" alt="User Profile Picture">
+                <h3>Juan Dela Cruz</h3>
+                <p>Registered Citizen of Urbiztondo</p>
+
+                <div class="profile-info">
+                    <div>
+                        <strong>Email:</strong> <span>juan.delacruz@example.com</span>
+                    </div>
+                    <div>
+                        <strong>Phone:</strong> <span>+63 9XX XXX XXXX</span>
+                    </div>
+                    <div>
+                        <strong>Address:</strong> <span>123 Urbiztondo Street, Brgy. Centro, Urbiztondo, Pangasinan</span>
+                    </div>
+                    <div>
+                        <strong>Date Registered:</strong> <span>January 1, 2023</span>
+                    </div>
+                    <div>
+                        <strong>Citizen ID:</strong> <span>UBZ-2023-0001</span>
+                    </div>
+                </div>
+
+                <button class="action-button">Edit Profile</button>
+            </div>
+        </section>
+
+        <!-- Payment History for Permits Section -->
+        <section class="history-section">
+            <h2>Transaction History</h2>
+            <p>Below is a record of your payments for various permits issued by the Municipality of Urbiztondo.</p>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Permit Type</th>
+                        <th>Amount</th>
+                        <th>Reference No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-06-20</td>
+                        <td>Business Permit</td>
+                        <td>₱ 1,500.00</td>
+                        <td>BP-2024-00123</td>
+                    </tr>
+                    <tr>
+                        <td>2024-05-15</td>
+                        <td>Building Permit</td>
+                        <td>₱ 5,000.00</td>
+                        <td>BP-2024-00056</td>
+                    </tr>
+                    <tr>
+                        <td>2024-04-01</td>
+                        <td>Sanitary Permit</td>
+                        <td>₱ 250.00</td>
+                        <td>SP-2024-00789</td>
+                    </tr>
+                    <tr>
+                        <td>2024-03-22</td>
+                        <td>Occupancy Permit</td>
+                        <td>₱ 750.00</td>
+                        <td>OP-2024-00021</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer>
+            &copy; <span id="current-year"></span> Municipality of Urbiztondo. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        // Set current year for the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Fallback for image loading errors (though placeholder is used here)
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.src = 'https://placehold.co/150x150/CCCCCC/666666?text=Image+Error';
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,17 +16,21 @@
         </div>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="aboutus.php">About Us</a></li>
             <li><a href="#">Services</a></li>
-            <li><a href="#">Appointment</a></li>
-            <li><a href="#">Health</a></li>
-            <li><a href="#">Forms</a></li>
-            <li><a href="#">Tracker</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Log out</a></li>
-            <li><a href="#">Log-in/Register</a></li>
+            <li><a href="appointment.php">Appointment</a></li>
+            <li><a href="health.php">Health</a></li>
+            <li><a href="forms.php">Forms</a></li>
+            <li><a href="paytrack.php">Tracker</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="http://localhost/Service/logout.php">Log out</a></li>
+            <?php else: ?>
+            <li><a href="http://localhost/Service/login.html">Log-in/Register</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
+
     <div class="content">
         <div class="hero-carousel-inner">
             <div class="hero-slide" style="background-image: url('images/homebg3.jpg');">
@@ -51,6 +57,7 @@
         <button class="open-prev" onclick="heroPrevSlide()">&#10094;</button>
         <button class="open-next" onclick="heroNextSlide()">&#10095;</button>
     </div>
+
     <section class="announcements-section" id="announcement">
         <h2>Announcements</h2>
         <div class="announcement-content-wrapper">
@@ -101,6 +108,7 @@
             </div>
         </div>
     </section>
+
     <section class="news-section" id="news">
         <h2>News and Events</h2>
         <div class="news-grid">
@@ -127,6 +135,7 @@
             </div>
         </div>
     </section>
+
     <section class="hotlines-section" id="hotlines">
         <h2>Important Hotlines</h2>
         <div class="hotlines-grid">
@@ -162,6 +171,28 @@
             </div>
         </div>
     </section>
+
+    <section class="social-media-section" id="social-media">
+        <h2>More to Urbiztondo Online</h2>
+        <div class="social-links">
+            <a href="https://www.facebook.com/municipalityofurbiztondo.pangasinan" target="_blank" class="social-link-card">
+                <img src="images/fb_logo.png" alt="Facebook Icon">
+                <h3>Urbiztondo Facebook Page</h3>
+                <p>Stay updated on the latest news and events.</p>
+            </a>
+            <a href="https://urbiztondo.gov.ph/home/" target="_blank" class="social-link-card">
+                <img src="images/urbiztondo.png" alt="Website Icon">
+                <h3>Urbiztondo Official Website</h3>
+                <p>Explore official government services and information.</p>
+            </a>
+            <a href="https://www.pangasinan.gov.ph/city-municipalities/urbiztondo/" target="_blank" class="social-link-card">
+                <img src="images/pangasinan.png" alt="Pangasinan Website Icon">
+                <h3>Pangasinan Provincial Website</h3>
+                <p>Learn more about the Province of Pangasinan.</p>
+            </a>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer-content">
             <img src="images/logo.png" alt="Urbiztondo Logo">
@@ -182,6 +213,7 @@
             © 2025 Municipality of Urbiztondo. All rights reserved.
         </p>
     </footer>
+
     <script>
         // --- Hero Carousel Logic ---
         let heroSlideIndex; // Will be initialized to point to the first REAL slide
