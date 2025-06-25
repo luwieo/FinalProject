@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || ($_SESSION['user']['user_type'] ?? '') !== 'Municipal Treasurer / Finance Officer') {
+if (!isset($_SESSION['user_id']) || ($_SESSION['user']['user_type'] ?? '') !== 'System Administrator') {
     header('Location: ../User/login.html?error=access_denied');
     exit;
 }
@@ -21,26 +21,74 @@ $payments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance Officer Dashboard</title>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/urbiztondo-auth/admin/admin_dashboard.css">
+    <link rel="stylesheet" href="css/usermanagement.css">
 </head>
 
 <body>
     <section id="sidebar">
         <a href="#" class="brand">
-            <img src="/urbiztondo-auth/images/logo.png" id="logo">
-            <span class="text">Urbiztondo<br>Finance Portal</span>
+            <img src="images/logo.png" id="logo">
+            <span class="text">Urbiztondo <br> Admin Portal</span>
         </a>
         <ul class="side-menu top">
+            <li>
+                <a href="dashboard.php" data-target="dashboard">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="analytics.php" data-target="analytics">
+                    <i class='bx bxs-doughnut-chart'></i>
+                    <span class="text">Application Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="usermanagement.php" data-target="user-management">
+                    <i class='bx bx-user'></i>
+                    <span class="text">User Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="appointments.php" data-target="appointment">
+                    <i class='bx bx-calendar'></i>
+                    <span class="text">Appointment</span>
+                </a>
+            </li>
             <li class="active">
-                <a href="#">
+                <a href="finance_dashboard.php" data-target="finance">
                     <i class='bx bxs-bank'></i>
-                    <span class="text">Payments</span>
+                    <span class="text">Finance</span>
+                </a>
+            </li>
+            <li>
+                <a href="CMS.php" class="admin-cms-link">
+                    <i class='bx bxs-edit'></i>
+                    <span class="text">Admin CMS</span>
+                </a>
+            </li>
+            <li>
+                <a href="com&notiffinal.php" class="admin-cms-link">
+                    <i class='bx bxs-bell'></i>
+                    <span class="text">Comm & Notif</span>
+                </a>
+            </li>
+            <li>
+                <a href="feedbackfinal.php" class="admin-cms-link">
+                    <i class='bx bxs-comment-detail'></i>
+                    <span class="text">Feedback</span>
                 </a>
             </li>
         </ul>
         <ul class="side-menu bottom">
             <li>
-                <a href="../logout.php">
+                <a href="settings" class="settings" data-target="settings">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="log-out" class="logout" data-target="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>

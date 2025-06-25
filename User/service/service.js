@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const createHomeButton = () => {
-        return `<a href="index.html" class="continue-btn">Home</a>`;
+        return `<a href="../home.php" class="continue-btn">Home</a>`;
     };
     
     const updateApplicationContent = (service, type) => {

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Redirect based on user_type
             if ($_SESSION['user']['user_type'] === 'System Administrator') {
-                header('Location: Admin/admin_dashboard.php'); // Redirect to your admin dashboard
+                header('Location: Admin3/dashboard.php'); // Redirect to your admin dashboard
                 exit;
             } else {
                 header('Location: User/home.php'); // Redirect to the public home page

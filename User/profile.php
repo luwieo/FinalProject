@@ -682,33 +682,32 @@
                     <div class="profile-info-item">
                         <i class="fas fa-user"></i>
                         <span class="label">Full Name:</span>
-                        <span class="value" id="fullName">Juan Dela Cruz</span>
+                        <span class="value" id="fullName">Jana Louise Soriano</span>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-envelope"></i>
                         <span class="label">Email:</span>
-                        <span class="value" id="email">juan.delacruz@example.com</span>
+                        <span class="value" id="email">luwiluwi@gmail.com</span>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-phone"></i>
                         <span class="label">Phone:</span>
-                        <span class="value" id="phone">+63 917 123 4567</span>
+                        <span class="value" id="phone">+63 949 885 1508</span>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span class="label">Address:</span>
-                        <span class="value" id="address">123 Urbiztondo Street, Brgy. Centro, Urbiztondo,
-                            Pangasinan</span>
+                        <span class="value" id="address">Street Fighter</span>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-calendar-alt"></i>
                         <span class="label">Date of Birth:</span>
-                        <span class="value" id="dob">1990-05-15</span>
+                        <span class="value" id="dob">2004-06-01</span>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-venus-mars"></i>
                         <span class="label">Gender:</span>
-                        <span class="value" id="gender">Male</span>
+                        <span class="value" id="gender">Female</span>
                     </div>
                 </div>
 

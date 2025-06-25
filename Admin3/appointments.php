@@ -1,94 +1,230 @@
+<?php
+session_start();
+
+// Check if user is logged in AND if they are an admin
+if (!isset($_SESSION['user_id']) || ($_SESSION['user']['user_type'] ?? 'Resident') !== 'System Administrator') {
+    // Not logged in or not an admin, redirect to login page (in User folder)
+    header('Location: ../User/login.html?error=access_denied');
+    exit;
+}
+
+// If they are an admin, display the admin content
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Municipal Service Admin Dashboard</title>
+
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/usermanagement.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <title>Admin Portal - Appointment Management</title>
     <style>
-        /* General Body Styles */
+        /* Custom styles that might not be covered directly by Tailwind or to override defaults */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #374151; /* Default text color */
         }
-        /* Main Container Styling */
-        .container {
-            max-width: 960px;
-            margin: 2.5rem auto;
-            background-color: #fff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-radius: 0.75rem;
-            overflow: hidden;
+        body.dark {
+            background-color: #1a202c; /* Dark mode background */
+            color: #e2e8f0; /* Dark mode text color */
         }
-        /* Header Styling */
-        header {
-            background-image: linear-gradient(to right, #dc2626, #991b1b); /* red-600 to red-800 */
-            color: #fff;
-            padding: 1.5rem;
+
+        /* Adjustments for the main content area */
+        #admin-app {
+            padding: 2rem; /* Tailwind p-8 equivalent */
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Specific styles for status select to ensure consistent badge-like appearance */
+        .status-select {
+            appearance: none;
             text-align: center;
-            border-top-left-radius: 0.75rem;
-            border-top-right-radius: 0.75rem;
+            border: none;
+            padding: 0.375rem 0.75rem; /* py-1 px-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 600; /* font-semibold */
+            color: white;
+            cursor: pointer;
+            min-width: 100px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
-        /* Main Content Area Styling */
-        main {
-            padding: 2rem;
+        .status-select:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); /* shadow-md */
         }
-        /* Footer Styling */
-        footer {
-            background-color: #f3f4f6; /* gray-100 */
-            padding: 1.5rem;
-            text-align: center;
-            color: #4b5563; /* gray-600 */
-            font-size: 0.875rem;
-            border-top: 1px solid #e5e7eb;
-            border-bottom-left-radius: 0.75rem;
-            border-bottom-right-radius: 0.75rem;
-        }
-        /* Modal Styling */
+
+        /* Specific background colors for status options */
+        .status-select.status-booked { background-color: #3B82F6; /* blue-500 */ }
+        .status-select.status-pending { background-color: #FBBF24; /* amber-400 or yellow-500 */ }
+        .status-select.status-completed { background-color: #22C55E; /* green-500 */ }
+        .status-select.status-cancelled { background-color: #EF4444; /* red-500 */ } /* Keeping red for cancelled as it signifies a negative state */
+
+        /* Modal specific styles for animation */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 1000;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
         }
         .modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            max-width: 400px;
-            width: 100%;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
             text-align: center;
+            max-width: 90%;
+            width: 450px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        body.dark .modal-content {
+            background-color: #2d3748; /* Dark mode background for modal */
+        }
+
+        .success-icon {
+            height: 4.5rem;
+            width: 4.5rem;
+            color: #22C55E; /* green-500 */
+            margin: 0 auto 1.5rem auto;
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        @keyframes bounceIn {
+          0% {
+            transform: scale(0.3);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 1;
+          }
+          70% {
+            transform: scale(0.9);
+          }
+          100% {
             transform: scale(1);
-            transition: all 0.3s ease-out;
-        }
-        /* Loading spinner */
-        .loader {
-            border-top-color: #3498db;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
-        }
-        @-webkit-keyframes spinner {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-        @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            opacity: 1;
+          }
         }
     </style>
 </head>
-<body>
-    <div id="admin-app" class="container">
-        </div>
 
+<body>
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <img src="images/logo.png" id="logo">
+            <span class="text">Urbiztondo <br> Admin Portal</span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="dashboard.php" data-target="dashboard">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="analytics.php" data-target="analytics">
+                    <i class='bx bxs-doughnut-chart'></i>
+                    <span class="text">Application Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="usermanagement.php" data-target="user-management">
+                    <i class='bx bx-user'></i>
+                    <span class="text">User Management</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="appointment.php" data-target="appointment">
+                    <i class='bx bx-calendar'></i>
+                    <span class="text">Appointment</span>
+                </a>
+            </li>
+            <li>
+                <a href="finance_dashboard.php" data-target="finance">
+                    <i class='bx bxs-bank'></i>
+                    <span class="text">Finance</span>
+                </a>
+            </li>
+            <li>
+                <a href="CMS.php" class="admin-cms-link">
+                    <i class='bx bxs-edit'></i>
+                    <span class="text">Admin CMS</span>
+                </a>
+            </li>
+            <li>
+                <a href="com&notiffinal.php" class="admin-cms-link">
+                    <i class='bx bxs-bell'></i>
+                    <span class="text">Comm & Notif</span>
+                </a>
+            </li>
+            <li>
+                <a href="feedbackfinal.php" class="admin-cms-link">
+                    <i class='bx bxs-comment-detail'></i>
+                    <span class="text">Feedback</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu bottom">
+            <li>
+                <a href="settings" class="settings" data-target="settings">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="log-out" class="logout" data-target="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu' ></i>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="profile.html" class="profile">
+                <img src="images/people.png">
+            </a>
+        </nav>
+
+        <main>
+            <div id="admin-app" class="container">
+                </div>
+        </main>
+    </section>
+
+    <script src="js/dashboard.js"></script>
     <script>
         // No Firebase imports needed as data persistence is not required
 
@@ -112,9 +248,9 @@
             adminServices: [...services], // Admin's editable list of services (copy of initial services)
             editingServiceId: null, // ID of the service being edited in admin panel
             simulatedAppointments: [ // Simulated appointments for admin view
-                { id: 'app001', serviceName: 'In-Person Transaction', serviceId: 'in_person_transaction', date: new Date().toISOString().split('T')[0], time: '09:00 AM', userName: 'John Doe', userEmail: 'john.doe@example.com', userPhone: '555-1234', status: 'booked', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
-                { id: 'app002', serviceName: 'Medical Consultation', serviceId: 'medical_consultation', date: new Date().toISOString().split('T')[0], time: '10:30 AM', userName: 'Jane Smith', userEmail: 'jane.smith@example.com', userPhone: '555-5678', status: 'booked', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
-                { id: 'app003', serviceName: 'Grievance Meeting', serviceId: 'grievance_meeting', date: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0], time: '02:00 PM', userName: 'Peter Jones', userEmail: 'peter.jones@example.com', userPhone: '555-9012', status: 'pending', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
+                { id: 'app001', serviceName: 'In-Person Transaction', serviceId: 'in_person_transaction', date: new Date().toISOString().split('T')[0], time: '09:00 AM', userName: 'Michael Famador', userEmail: 'famador.michael@gmail.com', userPhone: '555-1234', status: 'booked', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
+                { id: 'app002', serviceName: 'Medical Consultation', serviceId: 'medical_consultation', date: new Date().toISOString().split('T')[0], time: '10:30 AM', userName: 'Mylene Esquilona', userEmail: 'esquilona.mylene@gmail.com', userPhone: '555-5678', status: 'booked', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
+                { id: 'app003', serviceName: 'Grievance Meeting', serviceId: 'grievance_meeting', date: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0], time: '02:00 PM', userName: 'Kim Napatutan', userEmail: 'napatutan.kim@gmail.com', userPhone: '555-9012', status: 'pending', timestamp: new Date().toISOString(), userId: 'guest-user-123' },
             ],
             showConfirmationModal: false,
             confirmationMessage: '',
@@ -281,7 +417,7 @@
             const appointmentIndex = state.simulatedAppointments.findIndex(app => app.id === appointmentId);
             if (appointmentIndex !== -1) {
                 state.simulatedAppointments[appointmentIndex].status = newStatus;
-                renderAdminApp();
+                renderAdminApp(); // Re-render to reflect status change visually
                 handleAdminActionSuccess(`Appointment ${appointmentId} status changed to ${newStatus}.`);
             } else {
                 state.error = `Appointment ${appointmentId} not found.`;
@@ -315,13 +451,17 @@
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Confirm Action</h3>
                         <p class="text-gray-600 mb-6">${message}</p>
                         <div class="flex justify-center space-x-4">
-                            <button id="confirmYes" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Yes</button>
-                            <button id="confirmNo" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">No</button>
+                            <button id="confirmYes" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">Yes</button>
+                            <button id="confirmNo" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">No</button>
                         </div>
                     </div>
                 </div>
             `;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
+            requestAnimationFrame(() => { // Ensure modal is rendered before adding 'show' class
+                document.getElementById('customConfirmModal').classList.add('show');
+            });
+
 
             document.getElementById('confirmYes').onclick = () => {
                 onConfirm();
@@ -340,7 +480,7 @@
          */
         function renderAdminHeader() {
             return `
-                <header class="bg-gradient-to-r from-red-600 to-red-800 text-white p-6 text-center rounded-t-xl">
+                <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 text-center rounded-t-xl">
                     <h1 class="text-4xl font-extrabold mb-2">Municipal Admin Dashboard</h1>
                     <p class="text-xl font-light">Manage Services & Appointments</p>
                 </header>
@@ -377,9 +517,9 @@
 
             return `
                 <div class="space-y-8">
-                    <h2 class="text-3xl font-bold text-center text-red-700 mb-6">Admin Dashboard</h2>
+                    <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">Admin Dashboard</h2>
 
-                    ${state.error ? `<p class="text-red-600 text-center p-2 rounded-md bg-red-100 border border-red-200 mb-4">${state.error}</p>` : ''}
+                    ${state.error ? `<p class="bg-blue-100 text-blue-600 p-2 rounded-md border border-blue-200 mb-4 text-center font-semibold">${state.error}</p>` : ''}
 
                     <section class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
                         <h3 class="text-2xl font-semibold text-gray-800 mb-4">Today's Appointments Overview (${new Date().toLocaleDateString()})</h3>
@@ -387,8 +527,8 @@
                             ${state.adminServices.map(service => {
                                 const serviceAppointmentsToday = todayAppointments.filter(app => app.serviceName === service.name);
                                 return `
-                                    <div class="bg-white p-4 rounded-md shadow-sm border border-red-100">
-                                        <p class="text-lg font-semibold text-red-600">${service.name}</p>
+                                    <div class="bg-white p-4 rounded-md shadow-sm border border-blue-100">
+                                        <p class="text-lg font-semibold text-blue-600">${service.name}</p>
                                         <p class="text-gray-700 text-xl font-bold">${serviceAppointmentsToday.length} <span class="text-base font-normal">appointments</span></p>
                                     </div>
                                 `;
@@ -404,18 +544,18 @@
                             <form id="addServiceForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="newServiceName" class="block text-gray-700 text-sm font-bold mb-1">Service Name:</label>
-                                    <input type="text" id="newServiceName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                    <input type="text" id="newServiceName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                 </div>
                                 <div>
                                     <label for="newServiceDuration" class="block text-gray-700 text-sm font-bold mb-1">Duration (minutes):</label>
-                                    <input type="number" id="newServiceDuration" min="5" step="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                    <input type="number" id="newServiceDuration" min="5" step="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                 </div>
                                 <div class="col-span-full">
                                     <label for="newServiceDescription" class="block text-gray-700 text-sm font-bold mb-1">Description:</label>
-                                    <textarea id="newServiceDescription" rows="2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required></textarea>
+                                    <textarea id="newServiceDescription" rows="2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                                 </div>
                                 <div class="col-span-full">
-                                    <button type="submit" id="addServiceButton" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                                    <button type="submit" id="addServiceButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
                                         Add Service
                                     </button>
                                 </div>
@@ -428,7 +568,7 @@
                                 <li class="py-3 flex flex-col md:flex-row justify-between items-start md:items-center">
                                     <div class="mb-2 md:mb-0">
                                         <p class="text-lg font-medium text-gray-900">${service.name} (${service.duration} mins)</p>
-                                        <p class="text-sm text-gray-600">${service.description}</p>
+                                                            <p class="text-sm text-gray-600">${service.description}</p>
                                     </div>
                                     <div class="flex space-x-2">
                                         <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-1 px-3 rounded-md edit-service-btn" data-service-id="${service.id}">Edit</button>
@@ -444,15 +584,15 @@
                                 <form id="editServiceForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label for="editServiceName" class="block text-gray-700 text-sm font-bold mb-1">Service Name:</label>
-                                        <input type="text" id="editServiceName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                        <input type="text" id="editServiceName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                     </div>
                                     <div>
                                         <label for="editServiceDuration" class="block text-gray-700 text-sm font-bold mb-1">Duration (minutes):</label>
-                                        <input type="number" id="editServiceDuration" min="5" step="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                        <input type="number" id="editServiceDuration" min="5" step="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                     </div>
                                     <div class="col-span-full">
                                         <label for="editServiceDescription" class="block text-gray-700 text-sm font-bold mb-1">Description:</label>
-                                        <textarea id="editServiceDescription" rows="2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required></textarea>
+                                        <textarea id="editServiceDescription" rows="2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                                     </div>
                                     <div class="col-span-full flex space-x-2">
                                         <button type="submit" id="updateServiceButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
@@ -482,7 +622,7 @@
                                             <p class="text-xs text-gray-500">User ID: ${app.userId}</p>
                                         </div>
                                         <div class="flex space-x-2">
-                                            <select class="px-2 py-1 rounded-full text-xs font-semibold change-status-select" data-appointment-id="${app.id}">
+                                            <select class="status-select" data-appointment-id="${app.id}">
                                                 <option value="booked" ${app.status === 'booked' ? 'selected' : ''}>BOOKED</option>
                                                 <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>PENDING</option>
                                                 <option value="completed" ${app.status === 'completed' ? 'selected' : ''}>COMPLETED</option>
@@ -505,16 +645,16 @@
         function renderConfirmationModal() {
             if (!state.showConfirmationModal) return '';
             return `
-                <div class="modal">
+                <div class="modal" id="confirmationModal">
                     <div class="modal-content">
-                        <div class="flex justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="success-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Success!</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Success!</h3>
                         <p class="text-gray-600 mb-6">${state.confirmationMessage}</p>
-                        <button id="close-modal" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                        <button id="close-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow transition-colors duration-200">
                             Close
                         </button>
                     </div>
@@ -553,20 +693,35 @@
             if (cancelEditButton) cancelEditButton.onclick = handleCancelEdit;
 
             // Appointment Status Change
-            adminAppDiv.querySelectorAll('.change-status-select').forEach(select => {
+            adminAppDiv.querySelectorAll('.status-select').forEach(select => { // Corrected selector
                 select.onchange = (e) => {
                     const appointmentId = e.currentTarget.dataset.appointmentId;
                     const newStatus = e.currentTarget.value;
                     handleChangeAppointmentStatus(appointmentId, newStatus);
+                    // Update class for visual styling immediately
+                    e.currentTarget.className = 'status-select status-' + newStatus;
                 };
+                // Initial status styling when rendered
+                select.classList.add('status-' + select.value);
             });
 
             // Confirmation modal close button listener
             const closeModalButton = document.getElementById('close-modal');
             if (closeModalButton) closeModalButton.onclick = () => {
                 state.showConfirmationModal = false;
-                renderAdminApp();
+                // Remove the 'show' class to trigger fade out before removal
+                document.getElementById('confirmationModal').classList.remove('show');
+                setTimeout(() => {
+                    // Only remove the element after the transition (if any)
+                    document.getElementById('confirmationModal').remove();
+                    renderAdminApp(); // Re-render to ensure state is clean
+                }, 300); // Match CSS transition duration
             };
+             // If a confirmation modal exists and is meant to be shown, add the 'show' class
+            const confirmationModal = document.getElementById('confirmationModal');
+            if (confirmationModal && state.showConfirmationModal) {
+                confirmationModal.classList.add('show');
+            }
         }
 
         // --- Main Admin Render Function ---
