@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Communication & Notification System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { background-color: #f8f9fa; }
+    .tab-btn.active { font-weight: bold; }
+    .alert-success { display: none; }
+    .preview-box {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 5px;
+      height: 150px;
+      overflow-y: auto;
+    }
+    .phone-sim {
+      background: #000;
+      color: #0f0;
+      padding: 1rem;
+      border-radius: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+        :root {
+            --color-light-text-primary: #fff;
+            --color-light-text-secondary: #eee;
+            --color-dark-text-primary: #333;
+            --color-section-heading: #2c5282;
+            --color-content-heading: #2d3748;
+            --color-content-paragraph: #4a5568;
+            --color-link-hover: #63b3ed;
+            --color-primary-blue: #3182ce;
+            --color-light-border: #718096; 
+
+            --background-modal-overlay: rgba(0, 0, 0, 0.7);
+            --background-shadow-light: rgba(0, 0, 0, 0.05);
+            --background-page: #f5f5f5;
+            --background-light-section: #e0f2f7;
+            --background-header: linear-gradient(135deg, #0a3d62 0%, #061c30 100%); 
+            --background-content-card: #fff;
+            --background-modal-header: #edf2f7;
+            --background-modal-content: #ffffff;
+            --background-navbar: #1a202c;
+            --background-navbar-hover: #2d3748;
+            --background-footer: #2d3748;
+            
+            --font-family-poppins: 'Poppins', sans-serif;
+            --font-family-inter: "Inter", sans-serif;
+            --font-family-franklin: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+             .navbar {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            top: 0;
+            left: 0;
+            padding: 10px 30px;
+            width: 100%;
+            height: 4.5rem;
+            z-index: 3;
+            color: var(--color-light-text-primary);
+            font-family: var(--font-family-inter); 
+            background-color: var(--background-navbar);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+               .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li a {
+            color: var(--color-light-text-primary);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a.active {
+            color: var(--color-link-hover);
+            background: var(--background-navbar-hover);
+            transform: translateY(-2px);
+        }
+
+        .page-header { 
+            text-align: center;
+            padding: 3% 1rem 4rem; 
+            background: var(--background-header); 
+            color: var(--color-light-text-primary); 
+            margin-top: 4.5rem; 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+        }
+
+        .page-header h1 {
+            font-size: 4em; 
+            font-weight: 800; 
+            color: var(--color-light-text-primary); 
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7); 
+            font-family: var(--font-family-franklin); 
+            margin-bottom: 1rem;
+            letter-spacing: 3px; 
+        }
+        @media (min-width: 640px) { 
+            .page-header h1 {
+                font-size: 4em; 
+            }
+        }
+
+        .page-header p {
+            font-size: 1.5rem; 
+            color: var(--color-light-text-secondary); 
+            font-family: var(--font-family-poppins); 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            max-width: 100; 
+            margin: 1rem auto 0;
+            letter-spacing: 0.5px; 
+        }
+        @media (min-width: 640px) { 
+            .page-header p {
+                font-size: 1.8em; 
+            }
+        }
+
+
+        html {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-inter); 
+            color: var(--color-dark-text-primary);
+            line-height: 1.6;
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--background-page); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+                .logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            margin-right: 1.5rem;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 1.2em;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+        }
+      
+         .footer {
+            background-color: var(--background-footer);
+            color: var(--color-light-text-secondary);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1em;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap; 
+        }
+
+        .footer-content img {
+            height: 100px;
+            width: auto;
+        }
+
+        .footer-text {
+            text-align: center;
+        }
+
+        .footer-text h3 {
+            margin: 0;
+            font-weight: bold;
+            font-size: 2rem;
+            color: var(--color-light-text-primary);
+        }
+
+        .footer-text p {
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .footer-text .contact-info {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            color: var(--color-link-hover);
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-light-text-primary);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--color-light-text-secondary);
+        }
+
+        html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+  flex: 1;
+}
+
+    </style>
+  </style>
+</head>
+<body>
+  </head>
+<body>
+    
+  <div class="container-fluid flex-grow-1 px-4">
+
+    <div class="mb-3">
+      <button id="emailTab" class="btn btn-outline-primary me-2 active" onclick="switchMode('email')">Email</button>
+      <button id="smsTab" class="btn btn-outline-secondary" onclick="switchMode('sms')">SMS</button>
+    </div>
+
+    <div id="successAlert" class="alert alert-success">Message sent successfully!</div>
+
+    <form onsubmit="sendMessage(event)">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="recipient" class="form-label">Recipient</label>
+            <select class="form-select" id="recipient" required>
+              <option value="">-- Select Recipient --</option>
+              <option value="All Citizens">All Citizens</option>
+              <option value="Barangay 1 Residents">Barangay 1 Residents</option>
+              <option value="Municipal Admins">Municipal Admins</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label" id="messageLabel">Email Message</label>
+            <textarea class="form-control" id="message" rows="4" placeholder="Type your message..." required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="attachment" class="form-label">Attach File (optional)</label>
+            <input type="file" id="attachment" class="form-control" />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <button type="button" class="btn btn-secondary ms-2" onclick="window.print()">Print Logs</button>
+        </div>
+
+        <div class="col-md-6">
+          <h5>Message Preview</h5>
+          <div id="previewBox" class="preview-box mb-3">
+            <em>Live preview will show here...</em>
+          </div>
+          <h6 class="mt-4">Mobile SMS Simulation:</h6>
+          <div class="phone-sim" id="phonePreview">
+From: Municipality of Urbiztondo
+----------------------------------
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="row mt-5">
+      <div class="col-md-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search messages..." onkeyup="filterTable()" />
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <h5>Sent Messages</h5>
+      <table class="table table-bordered table-striped mt-2" id="messageTable">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Recipient</th>
+            <th>Message</th>
+            <th>File</th>
+            <th>Time Sent</th>
+          </tr>
+        </thead>
+        <tbody id="messageTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ✅ Resized and Centered Chart Section -->
+    <div class="mt-5 text-center">
+      <h5>Message Type Summary</h5>
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+      <div style="max-width: 300px;">
+        <canvas id="msgChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart + JS Logic -->
+  <script>
+    let currentMode = 'email';
+    let messageCount = 0;
+    let emailCount = 0, smsCount = 0;
+
+    const ctx = document.getElementById('msgChart').getContext('2d');
+    const msgChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Email', 'SMS'],
+        datasets: [{
+          label: 'Message Type',
+          data: [0, 0],
+          backgroundColor: ['#0d6efd', '#6c757d']
+        }]
+      }
+    });
+
+    document.getElementById("message").addEventListener("input", updatePreview);
+
+    function switchMode(mode) {
+      currentMode = mode;
+      document.getElementById('emailTab').classList.remove('active');
+      document.getElementById('smsTab').classList.remove('active');
+      document.getElementById(mode + 'Tab').classList.add('active');
+      document.getElementById('messageLabel').innerText = mode === 'email' ? "Email Message" : "SMS Message";
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const msg = document.getElementById("message").value;
+      document.getElementById("previewBox").innerText = msg || "Live preview will show here...";
+      document.getElementById("phonePreview").innerText =
+        "From: Municipality of Urbiztondo\n----------------------------------\n" + (msg || "[No message typed]");
+    }
+
+    function sendMessage(event) {
+      event.preventDefault();
+      const recipient = document.getElementById("recipient").value;
+      const message = document.getElementById("message").value;
+      const attachmentInput = document.getElementById("attachment");
+      const file = attachmentInput.files[0] ? attachmentInput.files[0].name : "None";
+      const time = new Date().toLocaleString();
+
+      messageCount++;
+      const row = `
+        <tr>
+          <td>${messageCount}</td>
+          <td><span class="badge bg-${currentMode === 'email' ? 'primary' : 'secondary'}">${currentMode.toUpperCase()}</span></td>
+          <td>${recipient}</td>
+          <td>${message}</td>
+          <td>${file}</td>
+          <td>${time}</td>
+        </tr>
+      `;
+      document.getElementById("messageTableBody").innerHTML += row;
+
+      document.getElementById("message").value = "";
+      document.getElementById("recipient").value = "";
+      attachmentInput.value = "";
+      updatePreview();
+
+      if (currentMode === 'email') emailCount++; else smsCount++;
+      msgChart.data.datasets[0].data = [emailCount, smsCount];
+      msgChart.update();
+
+      const alertBox = document.getElementById("successAlert");
+      alertBox.style.display = "block";
+      setTimeout(() => alertBox.style.display = "none", 3000);
+    }
+
+    function filterTable() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const rows = document.querySelectorAll("#messageTable tbody tr");
+      rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
