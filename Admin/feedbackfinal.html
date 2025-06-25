@@ -36,6 +36,11 @@
     .badge-in-progress { background-color: #ffc107; }
     .badge-resolved { background-color: #198754; }
     .modal-body pre { white-space: pre-wrap; word-wrap: break-word; }
+
+    /* REMOVE UNDERLINE FROM SIDEBAR LINKS */
+    #sidebar a {
+      text-decoration: none !important;
+    }
   </style>
 </head>
 <body>
@@ -64,7 +69,7 @@
 
   <section id="content">
     <nav>
-      <i class='bx bx-menu' ></i>
+      <i class='bx bx-menu'></i>
       <input type="checkbox" id="switch-mode" hidden>
       <label for="switch-mode" class="switch-mode"></label>
       <a href="#" class="profile">
