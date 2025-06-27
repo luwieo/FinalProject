@@ -1,0 +1,557 @@
+/* css/appointments.css */
+
+/* General content wrapper for the main admin area */
+.admin-content-wrapper {
+    padding: 2rem; /* Consistent padding around the main content */
+    max-width: 1400px; /* Optional: Sets a max width for large screens */
+    margin: 0 auto; /* Centers the content wrapper */
+}
+
+/* Header section specific to the appointments page */
+.appointment-header {
+    background: linear-gradient(to right, var(--accent-red-dark), var(--accent-red)); /* Uses your red accent for a gradient */
+    color: white;
+    padding: 1.5rem; /* p-6 */
+    text-align: center;
+    border-top-left-radius: 0.75rem; /* rounded-t-xl */
+    border-top-right-radius: 0.75rem; /* rounded-t-xl */
+    box-shadow: var(--shadow-md); /* Add a subtle shadow */
+}
+
+.appointment-header-title {
+    font-size: 2.5rem; /* text-4xl, slightly larger for impact */
+    font-weight: 800; /* font-extrabold */
+    margin-bottom: 0.5rem; /* mb-2 */
+    letter-spacing: -0.025em; /* subtle tighter letter spacing */
+}
+
+.appointment-header-subtitle {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 300; /* font-light */
+    opacity: 0.9; /* Slightly less opaque for subtitle */
+}
+
+/* Main content area below the header */
+.appointment-main-content {
+    background-color: var(--bg-body); /* Main background for the content area */
+    padding: 2rem; /* p-8, ensures content is not directly against edges */
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    box-shadow: var(--shadow-lg); /* Larger shadow for the main content block */
+}
+body.dark .appointment-main-content {
+    background-color: var(--bg-dark-body); /* Dark mode body background */
+}
+
+
+/* Footer section specific to the appointments page */
+.appointment-footer {
+    background-color: var(--bg-card); /* bg-gray-100 */
+    padding: 1.5rem; /* p-6 */
+    text-align: center;
+    color: var(--text-secondary); /* text-gray-600 */
+    font-size: 0.875rem; /* text-sm */
+    border-top: 1px solid var(--border-color); /* border-t */
+    border-bottom-left-radius: 0.75rem; /* rounded-b-xl */
+    border-bottom-right-radius: 0.75rem; /* rounded-b-xl */
+    margin-top: 1rem; /* Added margin to separate from content */
+    box-shadow: var(--shadow-sm); /* Subtle shadow */
+}
+body.dark .appointment-footer {
+    background-color: var(--bg-light); /* Adjusted for dark mode */
+}
+
+/* Spacing utility similar to Tailwind's space-y-8 */
+.section-space-y > *:not(:last-child) {
+    margin-bottom: 2rem; /* Equivalent to space-y-8 */
+}
+
+/* Main title within the content area */
+.admin-main-title {
+    font-size: 2.25rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    text-align: center;
+    color: var(--accent-red); /* text-red-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Soft text shadow */
+}
+
+/* Error message styling */
+.error-message {
+    color: var(--accent-red-dark); /* text-red-600 */
+    background-color: var(--accent-light-red); /* bg-red-100 */
+    padding: 0.75rem 1rem; /* p-2, slightly more padding */
+    border-radius: 0.5rem; /* rounded-md */
+    border: 1px solid var(--accent-red-light); /* border border-red-200 */
+    margin-bottom: 1.5rem; /* mb-4, slightly more margin */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* General section container style (e.g., for overview, manage services, appointments) */
+.content-section {
+    background-color: var(--bg-card); /* bg-gray-50 */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.75rem; /* rounded-lg, slightly more rounded */
+    box-shadow: var(--shadow-md); /* shadow-sm */
+    border: 1px solid var(--border-color); /* border border-gray-200 */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition on hover */
+}
+.content-section:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: var(--shadow-lg); /* More prominent shadow on hover */
+}
+body.dark .content-section {
+    background-color: var(--bg-light); /* Dark mode background for sections */
+    border-color: var(--border-color-dark);
+}
+
+/* Title for each section */
+.section-title {
+    font-size: 1.75rem; /* text-2xl, slightly larger */
+    font-weight: 600; /* font-semibold */
+    color: var(--text-primary); /* text-gray-800 */
+    margin-bottom: 1.25rem; /* mb-4, slightly more margin */
+    border-bottom: 1px solid var(--border-color-light); /* Subtle underline */
+    padding-bottom: 0.5rem;
+}
+body.dark .section-title {
+    color: var(--text-dark-primary);
+    border-color: var(--border-color-dark);
+}
+
+/* Grid layout for overview boxes */
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 1rem; /* gap-4 */
+}
+@media (min-width: 768px) { /* md breakpoint */
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+    }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+    .overview-grid {
+        grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+    }
+}
+
+/* Individual overview box style */
+.overview-box {
+    background-color: var(--bg-body); /* bg-white */
+    padding: 1.25rem; /* p-4, slightly more padding */
+    border-radius: 0.625rem; /* rounded-md, slightly more rounded */
+    box-shadow: var(--shadow-sm); /* shadow-sm */
+    border: 1px solid var(--accent-red-light); /* border border-red-100 */
+    text-align: center; /* Center content in boxes */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.overview-box:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+body.dark .overview-box {
+    background-color: var(--bg-dark-card); /* Dark mode card background */
+    border-color: var(--accent-red-dark-translucent);
+}
+
+.overview-box-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: var(--accent-red); /* text-red-600 */
+    margin-bottom: 0.25rem;
+}
+body.dark .overview-box-title {
+    color: var(--accent-red-light);
+}
+
+.overview-box-value {
+    color: var(--text-primary); /* text-gray-700 */
+    font-size: 1.5rem; /* text-xl, slightly larger */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 0.25rem;
+}
+body.dark .overview-box-value {
+    color: var(--text-dark-primary);
+}
+
+.overview-box-unit {
+    font-size: 0.95rem; /* text-base, slightly larger */
+    font-weight: 400; /* font-normal */
+    color: var(--text-secondary); /* Ensure consistent color */
+}
+body.dark .overview-box-unit {
+    color: var(--text-dark-secondary);
+}
+
+
+/* Form section styling (add/edit service) */
+.form-section {
+    margin-bottom: 2rem; /* mb-6, increased margin */
+    border-bottom: 1px solid var(--border-color-light); /* border-b */
+    padding-bottom: 1.5rem; /* pb-4, increased padding */
+}
+body.dark .form-section {
+    border-color: var(--border-color-dark);
+}
+
+.form-title {
+    font-size: 1.375rem; /* text-xl, slightly larger */
+    font-weight: 600; /* font-semibold */
+    color: var(--text-secondary); /* text-gray-700 */
+    margin-bottom: 1rem; /* mb-3, slightly more margin */
+}
+body.dark .form-title {
+    color: var(--text-dark-secondary);
+}
+
+/* Form grid layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default single column */
+    gap: 1rem; /* gap-4 */
+}
+@media (min-width: 768px) { /* md breakpoint */
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+    }
+}
+.col-span-full {
+    grid-column: span 1 / span 1; /* Default for single column */
+}
+@media (min-width: 768px) {
+    .col-span-full {
+        grid-column: span 2 / span 2; /* Full width on md and larger */
+    }
+}
+
+/* Form labels */
+.form-label {
+    display: block;
+    color: var(--text-secondary); /* text-gray-700 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 0.375rem; /* mb-1, slightly more space */
+}
+body.dark .form-label {
+    color: var(--text-dark-secondary);
+}
+
+/* Form inputs and textareas */
+.form-input {
+    box-shadow: var(--shadow-sm); /* shadow */
+    appearance: none;
+    border: 1px solid var(--border-color); /* border */
+    border-radius: 0.375rem; /* rounded, slightly more rounded */
+    width: 100%;
+    padding: 0.625rem 0.875rem; /* py-2 px-3, slightly more padding */
+    color: var(--text-primary); /* text-gray-700 */
+    line-height: 1.375; /* leading-tight */
+    outline: none; /* focus:outline-none */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    background-color: var(--bg-body); /* Consistent input background */
+}
+.form-input:focus {
+    border-color: var(--accent-blue); /* focus:ring-red-500, changed to blue accent for focus */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* focus:ring-2 focus:ring-blue-500 (tailwindcss blue-500 rgba) */
+}
+body.dark .form-input {
+    background-color: var(--bg-dark-card); /* Adjust for dark mode */
+    border-color: var(--border-color-dark);
+    color: var(--text-dark-primary);
+}
+body.dark .form-input:focus {
+    border-color: var(--accent-blue-dark); /* Dark mode blue accent */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4); /* Lighter shadow for dark mode blue */
+}
+
+
+/* Form buttons - consistent styling using variables */
+.btn-primary {
+    background-color: var(--accent-blue); /* Changed from red to blue for primary action */
+    color: white;
+    font-weight: 700; /* font-bold */
+    padding: 0.625rem 1.25rem; /* py-2 px-4, slightly more padding */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+    background-color: var(--accent-blue-dark); /* Darker blue on hover */
+    transform: translateY(-1px); /* Slight lift */
+    box-shadow: var(--shadow-md);
+}
+
+.btn-success {
+    background-color: var(--accent-green); /* bg-green-500 */
+    color: white;
+    font-weight: 700;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+.btn-success:hover {
+    background-color: var(--accent-green-dark); /* Darker green */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-info {
+    background-color: var(--accent-purple); /* bg-blue-500, changed to purple for info actions */
+    color: white;
+    font-weight: 700;
+    padding: 0.375rem 0.875rem; /* py-1 px-3 (smaller) */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-xs);
+}
+.btn-info:hover {
+    background-color: var(--accent-purple-dark); /* Darker purple */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-danger {
+    background-color: var(--accent-red); /* bg-red-500 */
+    color: white;
+    font-weight: 700;
+    padding: 0.375rem 0.875rem; /* py-1 px-3 (smaller) */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-xs);
+}
+.btn-danger:hover {
+    background-color: var(--accent-red-dark); /* Darker red */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+    background-color: var(--text-light); /* bg-gray-500 */
+    color: white;
+    font-weight: 700;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover {
+    background-color: var(--text-dark); /* Darker gray */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.button-group {
+    display: flex;
+    gap: 0.75rem; /* space-x-2, slightly more gap */
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+
+
+/* List styling (Existing Services, All Appointments) */
+.list-divider > *:not(:last-child) {
+    border-bottom: 1px solid var(--border-color-light); /* divide-y divide-gray-200 */
+}
+body.dark .list-divider > *:not(:last-child) {
+    border-color: var(--border-color-dark);
+}
+
+.list-item {
+    padding-top: 0.875rem; /* py-3, slightly more padding */
+    padding-bottom: 0.875rem; /* py-3, slightly more padding */
+    display: flex;
+    flex-direction: column; /* flex-col */
+    justify-content: space-between;
+    align-items: flex-start; /* items-start */
+    gap: 0.5rem; /* Gap between content and buttons on small screens */
+}
+@media (min-width: 768px) { /* md breakpoint */
+    .list-item {
+        flex-direction: row; /* md:flex-row */
+        align-items: center; /* md:items-center */
+        gap: 1rem; /* Gap between content and buttons on larger screens */
+    }
+}
+
+.list-item-content {
+    margin-bottom: 0.5rem; /* mb-2 */
+    flex-grow: 1; /* Allows content to take available space */
+}
+@media (min-width: 768px) {
+    .list-item-content {
+        margin-bottom: 0; /* md:mb-0 */
+    }
+}
+
+.list-item-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-medium, slightly bolder */
+    color: var(--text-primary); /* text-gray-900 */
+    margin-bottom: 0.25rem; /* Small margin for subtitle */
+}
+body.dark .list-item-title {
+    color: var(--text-dark-primary);
+}
+
+.list-item-subtitle {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--text-secondary); /* text-gray-600 or text-gray-700 */
+    margin-bottom: 0.125rem; /* Very small margin */
+}
+body.dark .list-item-subtitle {
+    color: var(--text-dark-secondary);
+}
+
+.list-item-meta {
+    font-size: 0.75rem; /* text-xs */
+    color: var(--text-light); /* text-gray-500 */
+}
+body.dark .list-item-meta {
+    color: var(--text-dark-light);
+}
+
+/* Status Select dropdown */
+.status-select {
+    padding: 0.375rem 0.75rem; /* px-2 py-1, slightly more padding */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 600; /* font-semibold */
+    border: none;
+    appearance: none;
+    text-align: center;
+    color: white; /* Text color for badge */
+    cursor: pointer;
+    background-color: var(--accent-blue); /* Default for booked */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-xs);
+    min-width: 100px; /* Ensure consistent width */
+}
+.status-select:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Specific status colors for the select dropdown */
+.status-select.status-booked { background-color: var(--accent-blue); }
+.status-select.status-pending { background-color: var(--accent-yellow); }
+.status-select.status-completed { background-color: var(--accent-green); }
+.status-select.status-cancelled { background-color: var(--accent-red); }
+
+/* No appointments message */
+.no-appointments-message {
+    color: var(--text-secondary); /* text-gray-600 */
+    text-align: center;
+    padding: 1.5rem; /* Add some padding */
+    font-style: italic;
+}
+body.dark .no-appointments-message {
+    color: var(--text-dark-secondary);
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card); /* bg-white */
+    padding: 2.5rem; /* p-8, slightly more padding */
+    border-radius: 1rem; /* rounded-xl, slightly more rounded */
+    box-shadow: var(--shadow-xl); /* shadow-xl */
+    text-align: center;
+    max-width: 90%;
+    width: 450px; /* Slightly wider modal */
+    transform: translateY(20px); /* Initial position for animation */
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal.show .modal-content {
+    transform: translateY(0); /* Final position */
+    opacity: 1;
+}
+body.dark .modal-content {
+    background-color: var(--bg-light); /* Darker background in dark mode */
+}
+
+.modal-title {
+    font-size: 1.5rem; /* text-xl, slightly larger */
+    font-weight: 700; /* font-bold */
+    color: var(--text-primary); /* text-gray-800 */
+    margin-bottom: 1rem; /* mb-3, slightly more margin */
+}
+body.dark .modal-title {
+    color: var(--text-dark-primary);
+}
+
+.modal-text {
+    color: var(--text-secondary); /* text-gray-600 */
+    margin-bottom: 1.75rem; /* mb-6, slightly more margin */
+    line-height: 1.6; /* Better readability */
+}
+body.dark .modal-text {
+    color: var(--text-dark-secondary);
+}
+
+.modal-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* space-x-4 */
+}
+
+.success-icon {
+    height: 4.5rem; /* h-16, slightly larger */
+    width: 4.5rem; /* w-16, slightly larger */
+    color: var(--accent-green); /* text-green-500 */
+    margin: 0 auto 1.5rem auto; /* mb-4, slightly more margin */
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bounce animation */
+}
+
+/* Keyframe for success icon bounce animation */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
