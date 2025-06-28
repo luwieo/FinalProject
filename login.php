@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'address' => $user['address'] ?? 'N/A',
                 'birth_date' => $user['birth_date'] ?? 'N/A', // Using 'birth_date' as per your DB schema
                 'gender' => $user['gender'] ?? 'N/A',
-                'user_type' => $user['user_type'] ?? 'public' // Store the user type from the DB
+                'user_type' => $user['user_type'] ?? 'Resident' // Store the user type from the DB
             ];
 
             // Redirect based on user_type
