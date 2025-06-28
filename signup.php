@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Assuming your 'users' table has a 'user_type' column with a default of 'public'
         // If not, you might need to adjust the INSERT statement or your DB schema.
         $insert = $pdo->prepare("INSERT INTO users (first_name, last_name, gender, birth_date, address, email, mobile, password, resident, user_type)
-                                 VALUES (:first_name, :last_name, :gender, :birth_date, :address, :email, :mobile, :password, :resident, 'public')");
+                                 VALUES (:first_name, :last_name, :gender, :birth_date, :address, :email, :mobile, :password, :resident, 'Resident')");
         $insert->execute([
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = [
             'name' => $first_name . ' ' . $last_name,
             'email' => $email,
-            'user_type' => 'public' // Default user_type for new signups
+            'user_type' => 'Resident' // Default user_type for new signups
         ];
 
         // Redirect to login page with success message
